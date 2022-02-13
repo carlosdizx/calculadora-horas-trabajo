@@ -3,34 +3,24 @@ package ias.modelos;
 import ias.enums.ListaServicios;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity(name = "reportes")
 public class Reporte {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
-    @NotNull(message = "El tecnico no puede estar nulo")
-    @NotEmpty(message = "El técnico no puede estar vacio")
     private String tecnico;
 
-    @NotNull(message = "El servicio no puede estar nulo")
-    @NotEmpty(message = "El servicio no puede estar vacio")
     @Enumerated(EnumType.STRING)
     private ListaServicios servicio;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @NotNull(message = "La fecha de inicio no puede estar nulo")
-    @NotEmpty(message = "La fecha de inicio no puede estar vacio")
     private Date fecha_inicio;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @NotNull(message = "La fecha de finalización no puede estar nulo")
-    @NotEmpty(message = "La fecha de finalización no puede estar vacio")
-    private Date fecha_fino;
+    private Date fecha_finalizacion;
 
     public long getId() {
         return id;
@@ -64,11 +54,11 @@ public class Reporte {
         this.fecha_inicio = fecha_inicio;
     }
 
-    public Date getFecha_fino() {
-        return fecha_fino;
+    public Date getFecha_finalizacion() {
+        return fecha_finalizacion;
     }
 
-    public void setFecha_fino(Date fecha_fino) {
-        this.fecha_fino = fecha_fino;
+    public void setFecha_finalizacion(Date fecha_finalizacion) {
+        this.fecha_finalizacion = fecha_finalizacion;
     }
 }
