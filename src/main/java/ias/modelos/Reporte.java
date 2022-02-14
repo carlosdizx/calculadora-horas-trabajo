@@ -4,6 +4,7 @@ import ias.enums.ListaServicios;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
 
@@ -14,19 +15,22 @@ public class Reporte {
     private long id;
 
     @NotEmpty
+    @NotNull
     @Size(min = 2, max = 15)
-    @Column(nullable = false)
     private String tecnico;
 
     @Column(nullable = false)
+    @NotNull
     @Enumerated(EnumType.STRING)
     private ListaServicios servicio;
 
     @Column(nullable = false)
+    @NotNull
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecha_inicio;
 
     @Column(nullable = false)
+    @NotNull
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecha_finalizacion;
 
