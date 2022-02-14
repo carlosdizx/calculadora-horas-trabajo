@@ -24,7 +24,7 @@ import javax.validation.Valid;
 @CrossOrigin(origins = {"http://localhost:4200"})
 @RestController
 @RequestMapping("/reportes/")
-public class PersonaRest {
+public class ReporteRest {
 
     private final static int CANTIDAD_POR_PAGINA = 5;
 
