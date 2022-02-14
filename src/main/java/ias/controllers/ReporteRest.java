@@ -1,5 +1,6 @@
 package ias.controllers;
 
+import ias.enums.ListaServicios;
 import ias.modelos.Reporte;
 import ias.services.api.ReporteService;
 import org.springframework.beans.BeanUtils;
@@ -98,7 +99,10 @@ public class ReporteRest {
             RESPONSE.put("errors", errors);
             return new ResponseEntity(RESPONSE, HttpStatus.BAD_REQUEST);
         }
-
+        if (!reporte.esRangoValido()){
+            RESPONSE.put("mensaje","Fechas erroneas, ingrese correctamente los valores");
+            return new ResponseEntity(RESPONSE, HttpStatus.BAD_REQUEST);
+        }
         try {
             Reporte nuevaEntidad = service.save(reporte);
             RESPONSE.put("mensaje", NOMBRE_ENTIDAD + " ha sido creado con éxito!");
@@ -123,6 +127,10 @@ public class ReporteRest {
                     .collect(Collectors.toList());
 
             RESPONSE.put("errors", errors);
+            return new ResponseEntity(RESPONSE, HttpStatus.BAD_REQUEST);
+        }
+        if (!reporte.esRangoValido()){
+            RESPONSE.put("mensaje","Fechas erroneas, ingrese correctamente los valores");
             return new ResponseEntity(RESPONSE, HttpStatus.BAD_REQUEST);
         }
         try {
@@ -157,6 +165,23 @@ public class ReporteRest {
             }
         } catch (DataAccessException e) {
             RESPONSE.put("mensaje", "Error al realizar la eliminación en la base de datos");
+            RESPONSE.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+            return new ResponseEntity(RESPONSE, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    //---------------------------------------------------------------------------
+    //---------------------------------- EXTRA ----------------------------------
+    //---------------------------------------------------------------------------
+
+    @GetMapping("servicios")
+    public ResponseEntity<HashMap<String, Object>> findAllServicios() {
+        RESPONSE.clear();
+        try {
+            RESPONSE.put("servicios", ListaServicios.values());
+            return new ResponseEntity(RESPONSE, HttpStatus.OK);
+        } catch (DataAccessException e) {
+            RESPONSE.put("mensaje", "No se ha logrado realizar la consulta en la base de datos");
             RESPONSE.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
             return new ResponseEntity(RESPONSE, HttpStatus.INTERNAL_SERVER_ERROR);
         }

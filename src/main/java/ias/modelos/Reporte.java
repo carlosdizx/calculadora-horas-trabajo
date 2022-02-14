@@ -3,9 +3,7 @@ package ias.modelos;
 import ias.enums.ListaServicios;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.util.Date;
 
 @Entity(name = "reportes")
@@ -21,7 +19,6 @@ public class Reporte {
 
     @Column(nullable = false)
     @NotNull
-    @Enumerated(EnumType.STRING)
     private ListaServicios servicio;
 
     @Column(nullable = false)
@@ -72,5 +69,12 @@ public class Reporte {
 
     public void setFecha_finalizacion(Date fecha_finalizacion) {
         this.fecha_finalizacion = fecha_finalizacion;
+    }
+
+    public boolean esRangoValido() {
+        if (fecha_finalizacion.compareTo(fecha_inicio)>= 0) {
+            return true;
+        }
+        return false;
     }
 }
