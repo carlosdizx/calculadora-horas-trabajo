@@ -113,7 +113,7 @@ public class ReporteRest {
     }
 
     @PutMapping("edit/{id}")
-    public ResponseEntity<HashMap<String, Object>> edit(@Valid @RequestBody Reporte reporte, @PathVariable Long id, BindingResult result) {
+    public ResponseEntity<HashMap<String, Object>> edit(@Valid @RequestBody Reporte reporte, BindingResult result, @PathVariable Long id) {
         RESPONSE.clear();
         if (result.hasErrors()) {
 
@@ -128,7 +128,7 @@ public class ReporteRest {
         try {
             Reporte buscado = service.findByID(id);
             if (buscado != null) {
-                BeanUtils.copyProperties(reporte,buscado,"id");
+                BeanUtils.copyProperties(reporte, buscado, "id");
                 Reporte actualizado = service.save(buscado);
                 RESPONSE.put("mensaje", NOMBRE_ENTIDAD + " ha sido actualizado con éxito!");
                 RESPONSE.put(NOMBRE_ENTIDAD, actualizado);

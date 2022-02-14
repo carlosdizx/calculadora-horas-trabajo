@@ -3,6 +3,8 @@ package ias.modelos;
 import ias.enums.ListaServicios;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity(name = "reportes")
@@ -11,14 +13,20 @@ public class Reporte {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @NotEmpty
+    @Size(min = 2, max = 15)
+    @Column(nullable = false)
     private String tecnico;
 
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private ListaServicios servicio;
 
+    @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecha_inicio;
 
+    @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecha_finalizacion;
 
