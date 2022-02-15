@@ -71,12 +71,13 @@ public class ReporteRest {
     public ResponseEntity<HashMap<String, Object>> findAllById(@PathVariable Long id) {
         RESPONSE.clear();
         try {
-            Reporte reporte = service.findByID(id);
+            final Reporte reporte = service.findByID(id);
             if (reporte == null) {
                 RESPONSE.put("mensaje", NOMBRE_ENTIDAD + " no encontrado");
                 return new ResponseEntity(RESPONSE, HttpStatus.NOT_FOUND);
             } else {
                 RESPONSE.put(NOMBRE_ENTIDAD, reporte);
+                System.out.println(reporte);
                 return new ResponseEntity(RESPONSE, HttpStatus.OK);
             }
         } catch (DataAccessException e) {

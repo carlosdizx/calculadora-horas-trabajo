@@ -4,7 +4,9 @@ import ias.enums.ListaServicios;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 @Entity(name = "reportes")
 public class Reporte {
@@ -72,9 +74,33 @@ public class Reporte {
     }
 
     public boolean esRangoValido() {
-        if (fecha_finalizacion.compareTo(fecha_inicio)>= 0) {
+        if (fecha_finalizacion.compareTo(fecha_inicio) > 0) {
             return true;
         }
         return false;
+    }
+
+    public int darNumeroSemana(final Date pFecha)
+    {
+        final Calendar calendar =  new GregorianCalendar();
+        calendar.setFirstDayOfWeek(Calendar.MONDAY);
+        calendar.set (Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+        calendar.setMinimalDaysInFirstWeek(7);
+        calendar.setTime(pFecha);
+        return calendar.get(Calendar.WEEK_OF_YEAR);
+    }
+
+
+    @Override
+    public String toString() {
+        return "Reporte{" +
+                "id=" + id +
+                ", tecnico='" + tecnico + '\'' +
+                ", servicio=" + servicio +
+                ", fecha_inicio=" + fecha_inicio +
+                ", fecha_finalizacion=" + fecha_finalizacion +
+                ", semana_incio=" + darNumeroSemana(fecha_inicio) +
+                ", semana_fin=" + darNumeroSemana(fecha_finalizacion) +
+                '}';
     }
 }
