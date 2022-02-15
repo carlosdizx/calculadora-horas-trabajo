@@ -21,6 +21,7 @@ public class Reporte {
 
     @Column(nullable = false)
     @NotNull
+    @Enumerated(EnumType.STRING)
     private ListaServicios servicio;
 
     @Column(nullable = false)

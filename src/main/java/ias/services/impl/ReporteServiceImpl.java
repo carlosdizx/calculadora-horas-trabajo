@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ReporteServiceImpl extends GenericServiceImpl<Reporte, Long> implements ReporteService {
     @Autowired
@@ -16,5 +18,10 @@ public class ReporteServiceImpl extends GenericServiceImpl<Reporte, Long> implem
     @Override
     public JpaRepository<Reporte, Long> getDao() {
         return dao;
+    }
+
+    @Override
+    public List<Reporte> findAllByTecnico(String tecnico) {
+        return dao.findAllByTecnico(tecnico);
     }
 }
