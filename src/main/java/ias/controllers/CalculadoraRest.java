@@ -46,8 +46,8 @@ public class CalculadoraRest {
                 contHoras.updateAndGet(v -> v + CALCULADORA.darHorasTrabajadas());
                 contHorasSemana.updateAndGet(v -> v + CALCULADORA.darHorasTrabajadasPorSemana(semana));
             });
-            //RESPONSE.put("mensaje", "Horas trabajadas en total " + contHoras);
-            RESPONSE.put("mensaje2", "Semana " + semana + " hora acumuladas: " + contHorasSemana);
+            RESPONSE.put("mensaje", "Semana " + semana + ", horas acumuladas: " + contHorasSemana);
+            RESPONSE.put("mensaje2", "Horas trabajadas en total " + contHoras);
             return new ResponseEntity(RESPONSE, HttpStatus.OK);
         } catch (DataAccessException e) {
             RESPONSE.put("mensaje", "No se ha logrado realizar la consulta en la base de datos");
