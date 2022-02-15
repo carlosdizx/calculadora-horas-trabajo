@@ -100,7 +100,7 @@ public class ReporteRest {
             return new ResponseEntity(RESPONSE, HttpStatus.BAD_REQUEST);
         }
         if (!reporte.esRangoValido()){
-            RESPONSE.put("mensaje","Fechas erroneas, ingrese correctamente los valores");
+            RESPONSE.put("error","Fechas erroneas, ingrese correctamente los valores");
             return new ResponseEntity(RESPONSE, HttpStatus.BAD_REQUEST);
         }
         try {
@@ -130,7 +130,7 @@ public class ReporteRest {
             return new ResponseEntity(RESPONSE, HttpStatus.BAD_REQUEST);
         }
         if (!reporte.esRangoValido()){
-            RESPONSE.put("mensaje","Fechas erroneas, ingrese correctamente los valores");
+            RESPONSE.put("error","Fechas erroneas, ingrese correctamente los valores");
             return new ResponseEntity(RESPONSE, HttpStatus.BAD_REQUEST);
         }
         try {
