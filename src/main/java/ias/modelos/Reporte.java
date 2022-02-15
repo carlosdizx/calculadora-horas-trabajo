@@ -79,40 +79,4 @@ public class Reporte {
         }
         return false;
     }
-
-    public int darNumeroSemana(final Date pFecha)
-    {
-        final Calendar calendar =  new GregorianCalendar();
-        calendar.setFirstDayOfWeek(Calendar.MONDAY);
-        calendar.set (Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-        calendar.setMinimalDaysInFirstWeek(7);
-        calendar.setTime(pFecha);
-        return calendar.get(Calendar.WEEK_OF_YEAR);
-    }
-
-    public String horasTrabajadas() {
-        long diferencia = fecha_finalizacion.getTime() - fecha_inicio.getTime();
-        long dias=diferencia/(24*60*60*1000);
-        long horas=(diferencia/(60*60*1000)-dias*24);
-        long minutos=((diferencia/(60*1000))-dias*24*60-horas*60);
-        String msg = dias + " días " + horas + " horas " + minutos + " minutos";
-        System.out.println(msg);
-        msg = (dias*24+horas/60)+"";
-
-        return msg;
-    }
-
-    @Override
-    public String toString() {
-        return "Reporte{" +
-                "id=" + id +
-                ", tecnico='" + tecnico + '\'' +
-                ", servicio=" + servicio +
-                ", fecha_inicio=" + fecha_inicio +
-                ", fecha_finalizacion=" + fecha_finalizacion +
-                ", semana_incio=" + darNumeroSemana(fecha_inicio) +
-                ", semana_fin=" + darNumeroSemana(fecha_finalizacion) +
-                ", horas_trabajadas=" + horasTrabajadas() +
-                '}';
-    }
 }

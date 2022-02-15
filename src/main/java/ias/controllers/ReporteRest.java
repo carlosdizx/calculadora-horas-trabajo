@@ -1,6 +1,7 @@
 package ias.controllers;
 
 import ias.enums.ListaServicios;
+import ias.modelos.Calculadora;
 import ias.modelos.Reporte;
 import ias.services.api.ReporteService;
 import org.springframework.beans.BeanUtils;
@@ -77,7 +78,6 @@ public class ReporteRest {
                 return new ResponseEntity(RESPONSE, HttpStatus.NOT_FOUND);
             } else {
                 RESPONSE.put(NOMBRE_ENTIDAD, reporte);
-                System.out.println(reporte);
                 return new ResponseEntity(RESPONSE, HttpStatus.OK);
             }
         } catch (DataAccessException e) {
@@ -100,8 +100,8 @@ public class ReporteRest {
             RESPONSE.put("errors", errors);
             return new ResponseEntity(RESPONSE, HttpStatus.BAD_REQUEST);
         }
-        if (!reporte.esRangoValido()){
-            RESPONSE.put("error","Fechas erroneas, ingrese correctamente los valores");
+        if (!reporte.esRangoValido()) {
+            RESPONSE.put("error", "Fechas erroneas, ingrese correctamente los valores");
             return new ResponseEntity(RESPONSE, HttpStatus.BAD_REQUEST);
         }
         try {
@@ -130,8 +130,8 @@ public class ReporteRest {
             RESPONSE.put("errors", errors);
             return new ResponseEntity(RESPONSE, HttpStatus.BAD_REQUEST);
         }
-        if (!reporte.esRangoValido()){
-            RESPONSE.put("error","Fechas erroneas, ingrese correctamente los valores");
+        if (!reporte.esRangoValido()) {
+            RESPONSE.put("error", "Fechas erroneas, ingrese correctamente los valores");
             return new ResponseEntity(RESPONSE, HttpStatus.BAD_REQUEST);
         }
         try {
