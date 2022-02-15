@@ -38,8 +38,24 @@ public class Calculadora {
         double dias = diferencia / (24 * 60 * 60 * 1000);
         double horas = (diferencia / (60 * 60 * 1000) - dias * 24);
         double minutos = ((diferencia / (60 * 1000)) - dias * 24 * 60 - horas * 60);
-        String msg = dias + " días " + horas + " horas " + minutos + " minutos";
-        System.out.println(msg);
+
         return ((dias * 24 + horas) + (minutos / 60));
+    }
+
+    public double darHorasTrabajadasPorSemana(final int pSemana) {
+        double diferencia = reporte.getFecha_finalizacion().getTime() - reporte.getFecha_inicio().getTime();
+        double dias = diferencia / (24 * 60 * 60 * 1000);
+        double horas = (diferencia / (60 * 60 * 1000) - dias * 24);
+        double minutos = ((diferencia / (60 * 1000)) - dias * 24 * 60 - horas * 60);
+
+        int semana_inicio = darNumeroSemana(reporte.getFecha_inicio());
+        int semana_fin = darNumeroSemana(reporte.getFecha_finalizacion());
+
+        if (semana_inicio == semana_fin) {
+            if (pSemana == semana_fin) {
+                return ((dias * 24 + horas) + (minutos / 60));
+            }
+        }
+        return 0;
     }
 }
