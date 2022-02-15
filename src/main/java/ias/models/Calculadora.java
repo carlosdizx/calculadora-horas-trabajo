@@ -1,4 +1,4 @@
-package ias.modelos;
+package ias.models;
 
 import java.util.Calendar;
 import java.util.Date;

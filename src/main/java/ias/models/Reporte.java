@@ -1,12 +1,10 @@
-package ias.modelos;
+package ias.models;
 
 import ias.enums.ListaServicios;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 @Entity(name = "reportes")
 public class Reporte {
