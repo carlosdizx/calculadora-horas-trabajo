@@ -39,15 +39,12 @@ public class CalculadoraRest {
                 RESPONSE.put("mensaje", "Sin datos");
                 return new ResponseEntity(RESPONSE, HttpStatus.OK);
             }
-            AtomicReference<Double> contHoras = new AtomicReference<>((double) 0);
             AtomicReference<Double> contHorasSemana = new AtomicReference<>((double) 0);
             listado.stream().forEach(reporte -> {
                 CALCULADORA.setReporte(reporte);
-                contHoras.updateAndGet(v -> v + CALCULADORA.darTotalHorasTrabajadas());
                 contHorasSemana.updateAndGet(v -> v + CALCULADORA.darHorasTrabajadasPorSemana(anio,semana));
             });
             RESPONSE.put("mensaje", "Semana " + semana + ", horas acumuladas: " + contHorasSemana);
-            RESPONSE.put("mensaje2", "Horas trabajadas en total " + contHoras);
             return new ResponseEntity(RESPONSE, HttpStatus.OK);
         } catch (DataAccessException e) {
             RESPONSE.put("mensaje", "No se ha logrado realizar la consulta en la base de datos");
