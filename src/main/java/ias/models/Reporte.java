@@ -78,4 +78,8 @@ public class Reporte {
         }
         return false;
     }
+
+    public int darAnioFecha(final Date pFecha) {
+        return Integer.parseInt(pFecha.toString().split("-")[0]);
+    }
 }

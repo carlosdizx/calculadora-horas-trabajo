@@ -8,3 +8,6 @@ INSERT INTO public.reportes (fecha_finalizacion, fecha_inicio, servicio, tecnico
 
 INSERT INTO public.reportes (fecha_finalizacion, fecha_inicio, servicio, tecnico) VALUES ('2022-03-15 12:30:00.000000', '2022-03-15 12:00:00.000000', 'A', '1082749257');
 INSERT INTO public.reportes (fecha_finalizacion, fecha_inicio, servicio, tecnico) VALUES ('2022-03-15 13:30:00.000000', '2022-03-15 13:00:00.000000', 'A', '1082749257');
+
+INSERT INTO public.reportes (fecha_finalizacion, fecha_inicio, servicio, tecnico) VALUES ('2022-03-15 12:35:00.000000', '2022-03-15 12:00:00.000000', 'D', '87570236');
+INSERT INTO public.reportes (fecha_finalizacion, fecha_inicio, servicio, tecnico) VALUES ('2022-03-15 13:40:00.000000', '2022-03-15 13:00:00.000000', 'D', '87570236');

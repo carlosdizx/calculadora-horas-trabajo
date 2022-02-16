@@ -30,8 +30,8 @@ public class CalculadoraRest {
     @Autowired
     private ReporteService service;
 
-    @GetMapping("{tecnico}/{semana}")
-    public ResponseEntity<HashMap<String, Object>> findAllByTecnico(@PathVariable String tecnico, @PathVariable Integer semana) {
+    @GetMapping("{tecnico}/{anio}/{semana}")
+    public ResponseEntity<HashMap<String, Object>> findAllByTecnico(@PathVariable String tecnico,@PathVariable Integer anio ,@PathVariable Integer semana) {
         RESPONSE.clear();
         try {
             final List<Reporte> listado = service.findAllByTecnico(tecnico);
@@ -43,8 +43,8 @@ public class CalculadoraRest {
             AtomicReference<Double> contHorasSemana = new AtomicReference<>((double) 0);
             listado.stream().forEach(reporte -> {
                 CALCULADORA.setReporte(reporte);
-                contHoras.updateAndGet(v -> v + CALCULADORA.darHorasTrabajadas());
-                contHorasSemana.updateAndGet(v -> v + CALCULADORA.darHorasTrabajadasPorSemana(semana));
+                contHoras.updateAndGet(v -> v + CALCULADORA.darTotalHorasTrabajadas());
+                contHorasSemana.updateAndGet(v -> v + CALCULADORA.darHorasTrabajadasPorSemana(anio,semana));
             });
             RESPONSE.put("mensaje", "Semana " + semana + ", horas acumuladas: " + contHorasSemana);
             RESPONSE.put("mensaje2", "Horas trabajadas en total " + contHoras);
