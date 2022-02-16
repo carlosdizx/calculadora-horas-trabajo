@@ -31,7 +31,7 @@ public class CalculadoraRest {
     private ReporteService service;
 
     @GetMapping("{tecnico}/{anio}/{semana}")
-    public ResponseEntity<HashMap<String, Object>> findAllByTecnico(@PathVariable String tecnico,@PathVariable Integer anio ,@PathVariable Integer semana) {
+    public ResponseEntity<HashMap<String, Object>> findAllByTecnico(@PathVariable String tecnico, @PathVariable Integer anio, @PathVariable Integer semana) {
         RESPONSE.clear();
         try {
             final List<Reporte> listado = service.findAllByTecnico(tecnico);
@@ -39,12 +39,7 @@ public class CalculadoraRest {
                 RESPONSE.put("mensaje", "Sin datos");
                 return new ResponseEntity(RESPONSE, HttpStatus.OK);
             }
-            AtomicReference<Double> contHorasSemana = new AtomicReference<>((double) 0);
-            listado.stream().forEach(reporte -> {
-                CALCULADORA.setReporte(reporte);
-                contHorasSemana.updateAndGet(v -> v + CALCULADORA.darHorasTrabajadasPorSemana(anio,semana));
-            });
-            RESPONSE.put("mensaje", "Semana " + semana + ", horas acumuladas: " + contHorasSemana);
+            RESPONSE.put("informe", CALCULADORA.darInformes(anio, semana, listado));
             return new ResponseEntity(RESPONSE, HttpStatus.OK);
         } catch (DataAccessException e) {
             RESPONSE.put("mensaje", "No se ha logrado realizar la consulta en la base de datos");
