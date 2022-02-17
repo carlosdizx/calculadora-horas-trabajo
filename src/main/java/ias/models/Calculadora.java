@@ -1,7 +1,11 @@
 package ias.models;
 
+import java.time.*;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
+
+import static java.time.temporal.ChronoUnit.MINUTES;
+import static java.time.temporal.ChronoUnit.HOURS;
 
 public class Calculadora {
 
@@ -50,7 +54,7 @@ public class Calculadora {
         return ((dias * 24 + horas) + (minutos / 60));
     }
 
-    public double darTotalHorasTrabajadasPorSemana() {
+    public double darTotalHorasTrabajadasPorReporte() {
         double diferencia = reporte.getFecha_finalizacion().getTime() - reporte.getFecha_inicio().getTime();
         double dias = diferencia / (24 * 60 * 60 * 1000);
         double horas = (diferencia / (60 * 60 * 1000) - dias * 24);
@@ -58,41 +62,59 @@ public class Calculadora {
         return ((dias * 24 + horas) + (minutos / 60));
     }
 
-    public void darTotalHorasTrabajadasPorSemanaPorHorario() {
-        final long inicio = reporte.getFecha_inicio().getTime();
-        final long fin = reporte.getFecha_finalizacion().getTime();
-        double diferencia = fin - inicio;
-        double dias = diferencia / (24 * 60 * 60 * 1000);
-        double horas = (diferencia / (60 * 60 * 1000) - dias * 24);
-        double minutos = ((diferencia / (60 * 1000)) - dias * 24 * 60 - horas * 60);
-        final double horasTotales = ((dias * 24 + horas) + (minutos / 60));
-
-        final int semana = darNumeroSemana(reporte.getFecha_inicio());
-        if (inicio >= HORAS_NORMALES[0] && fin <= HORAS_NORMALES[1]) {
-            System.out.println("Reporte de " + reporte.getTecnico() + ", " +
-                    " de la semana " + semana + " " +
-                    "trabajo en horario normal, en total realizo " + horasTotales + " horas");
-        } else {
-            System.out.println("Reporte de " + reporte.getTecnico() + ", " +
-                    " de la semana " + darNumeroSemana(reporte.getFecha_inicio()) + " " +
-                    "trabajo en horario extraordinario, en total realizo " + horasTotales + " horas");
-        }
+    private boolean esTrabajoEnDiasNormales(final LocalDateTime pFecha) {
+        return pFecha.getDayOfWeek() == DayOfWeek.MONDAY || pFecha.getDayOfWeek() == DayOfWeek.TUESDAY ||
+                pFecha.getDayOfWeek() == DayOfWeek.WEDNESDAY || pFecha.getDayOfWeek() == DayOfWeek.THURSDAY ||
+                pFecha.getDayOfWeek() == DayOfWeek.FRIDAY || pFecha.getDayOfWeek() == DayOfWeek.SATURDAY;
     }
 
-    public List<String> darInformes(final int pFecha, final int pSemana, final List<Reporte> pReportes) {
-        final List<String> informes = new ArrayList();
-        AtomicReference<Double> horasSemana = new AtomicReference<>((double) 0);
+    public String darDetallesReporte() {
+        final String msg;
+        final LocalDateTime inicio = Instant.ofEpochMilli(reporte.getFecha_inicio().getTime())
+                .atZone(ZoneId.systemDefault())
+                .toLocalDateTime();
+        final LocalDateTime fin = Instant.ofEpochMilli(reporte.getFecha_finalizacion().getTime())
+                .atZone(ZoneId.systemDefault())
+                .toLocalDateTime();
+        final String tiempo = HOURS.between(inicio, fin) + " horas con " + MINUTES.between(inicio, fin) + " minutos";
+        final String horas = (HOURS.between(inicio, fin)+(double)MINUTES.between(inicio, fin)/60) + " horas";
+        final LocalTime tiempoMin = LocalTime.of(07, 00, 00, 00);
+        final LocalTime tiempoMax = LocalTime.of(20, 00, 00, 00);
+        System.out.println(inicio.getDayOfWeek()+"-"+fin.getDayOfWeek());
+        //System.out.println(HOURS.between(tiempoMin, inicio) + "~" + HOURS.between(tiempoMax, fin));
+        if (esTrabajoEnDiasNormales(inicio) && esTrabajoEnDiasNormales(fin)) {
+            //----------------------------------- Días normales-----------------------------------
+            if (inicio.getHour() >= HORAS_NORMALES[0] && fin.getHour() >= HORAS_NORMALES[1] && fin.getMinute() == 0) {
+                msg = "Trabajó en día normal con horarío normal, en total realizó " + tiempo+" " +
+                        "Oséa, "+horas;
+            } else {
+                msg = "Trabajó en día normal con horarío extraordinario, en total realizo " + tiempo+" " +
+                        "Oséa, "+horas;
+            }
+        } else {
+            msg = "Trabajó en horarío extraordinario, en total realizo " + tiempo+" " +
+                    "Oséa, "+horas;
+        }
+        return msg;
+    }
+
+    public List darInformes(final int pFecha, final int pSemana, final List<Reporte> pReportes) {
+        final List informes = new ArrayList();
+        final AtomicReference<Double> horasSemana = new AtomicReference<>((double) 0);
+        final List mensajes = new ArrayList<>();
         pReportes.stream().forEach(rp -> {
             setReporte(rp);
             if (esDelMismoAño(pFecha)) {
                 int semana_inicio = darNumeroSemana(reporte.getFecha_inicio());
                 int semana_fin = darNumeroSemana(reporte.getFecha_finalizacion());
                 if (semana_inicio == semana_fin && pSemana == semana_fin) {
-                    horasSemana.updateAndGet(v -> v + darTotalHorasTrabajadasPorSemana());
+                    horasSemana.updateAndGet(v -> v + darTotalHorasTrabajadasPorReporte());
+                    mensajes.add(darDetallesReporte());
                 }
             }
         });
         informes.add("Semana " + pSemana + ", horas acumuladas: " + horasSemana + "");
+        informes.add(mensajes);
         return informes;
     }
 }
