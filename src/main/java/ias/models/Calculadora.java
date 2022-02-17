@@ -83,22 +83,22 @@ public class Calculadora {
         //System.out.println(HOURS.between(tiempoMin, inicio) + "~" + HOURS.between(tiempoMax, fin));
         if (esTrabajoEnDiasNormales(inicio) && esTrabajoEnDiasNormales(fin)) {
             //----------------------------------- Días normales-----------------------------------
-            System.out.println(inicio.getHour() + "~" + fin.getHour() + "~" + (inicio.getHour() >= HORAS_NORMALES[0]) + "~" + (fin.getHour() >= HORAS_NORMALES[1]));
+            //System.out.println(inicio.getHour() + "~" + fin.getHour() + "~" + (inicio.getHour() >= HORAS_NORMALES[0]) + "~" + (fin.getHour() >= HORAS_NORMALES[1]));
             if (inicio.getHour() >= HORAS_NORMALES[0] && fin.getHour() <= HORAS_NORMALES[1]) {
                 msg = "Trabajó en día normal con horarío normal, en total realizó " + tiempo + " " +
-                        "Oséa, " + horas + (horasExtra?"(son horas extra)":"");
+                        "Oséa, " + horas + (horasExtra ? "(son horas extra)" : "");
             } else {
                 if (inicio.getHour() > HORAS_NORMALES[1] && fin.getHour() >= HORAS_NORMALES[1] ||
                         inicio.getHour() < HORAS_NORMALES[1] || fin.getHour() < HORAS_NORMALES[0]) {
                     msg = "Trabajó en día normal con horarío nocturno, en total realizo " + tiempo + " " +
-                            "Oséa, " + horas + (horasExtra?"(son horas nocturnas extra)":"");
+                            "Oséa, " + horas + (horasExtra ? "(son horas nocturnas extra)" : "");
                 } else {
                     msg = "";
                 }
             }
         } else {
             msg = "Trabajó en horarío dominical, en total realizo " + tiempo + " " +
-                    "Oséa, " + horas + (horasExtra?"(son horas dominicales extra)":"");
+                    "Oséa, " + horas + (horasExtra ? "(son horas dominicales extra)" : "");
         }
         return msg;
     }
@@ -114,8 +114,10 @@ public class Calculadora {
                 int semana_fin = darNumeroSemana(reporte.getFecha_finalizacion());
                 if (semana_inicio == semana_fin && pSemana == semana_fin) {
                     horasSemana.updateAndGet(v -> v + darTotalHorasTrabajadasPorReporte());
-                    mensajes.add(darDetallesReporte( horasSemana.get() >= 48));
+                    mensajes.add(darDetallesReporte(horasSemana.get() >= 48));
                 }
+                final Informe informe = new Informe(reporte.getFecha_inicio(), reporte.getFecha_finalizacion());
+                informe.darDiferencia();
             }
         });
         informes.add("Semana " + pSemana + ", horas acumuladas: " + horasSemana + "");
