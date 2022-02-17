@@ -68,7 +68,7 @@ public class Calculadora {
                 pFecha.getDayOfWeek() == DayOfWeek.FRIDAY || pFecha.getDayOfWeek() == DayOfWeek.SATURDAY;
     }
 
-    public String darDetallesReporte() {
+    public String darDetallesReporte(final boolean horasExtra) {
         final String msg;
         final LocalDateTime inicio = Instant.ofEpochMilli(reporte.getFecha_inicio().getTime())
                 .atZone(ZoneId.systemDefault())
@@ -77,23 +77,28 @@ public class Calculadora {
                 .atZone(ZoneId.systemDefault())
                 .toLocalDateTime();
         final String tiempo = HOURS.between(inicio, fin) + " horas con " + MINUTES.between(inicio, fin) + " minutos";
-        final String horas = (HOURS.between(inicio, fin)+(double)MINUTES.between(inicio, fin)/60) + " horas";
+        final String horas = (HOURS.between(inicio, fin) + (double) MINUTES.between(inicio, fin) / 60) + " horas";
         final LocalTime tiempoMin = LocalTime.of(07, 00, 00, 00);
         final LocalTime tiempoMax = LocalTime.of(20, 00, 00, 00);
-        System.out.println(inicio.getDayOfWeek()+"-"+fin.getDayOfWeek());
         //System.out.println(HOURS.between(tiempoMin, inicio) + "~" + HOURS.between(tiempoMax, fin));
         if (esTrabajoEnDiasNormales(inicio) && esTrabajoEnDiasNormales(fin)) {
             //----------------------------------- Días normales-----------------------------------
-            if (inicio.getHour() >= HORAS_NORMALES[0] && fin.getHour() >= HORAS_NORMALES[1] && fin.getMinute() == 0) {
-                msg = "Trabajó en día normal con horarío normal, en total realizó " + tiempo+" " +
-                        "Oséa, "+horas;
+            System.out.println(inicio.getHour() + "~" + fin.getHour() + "~" + (inicio.getHour() >= HORAS_NORMALES[0]) + "~" + (fin.getHour() >= HORAS_NORMALES[1]));
+            if (inicio.getHour() >= HORAS_NORMALES[0] && fin.getHour() <= HORAS_NORMALES[1]) {
+                msg = "Trabajó en día normal con horarío normal, en total realizó " + tiempo + " " +
+                        "Oséa, " + horas + (horasExtra?"(son horas extra)":"");
             } else {
-                msg = "Trabajó en día normal con horarío extraordinario, en total realizo " + tiempo+" " +
-                        "Oséa, "+horas;
+                if (inicio.getHour() > HORAS_NORMALES[1] && fin.getHour() >= HORAS_NORMALES[1] ||
+                        inicio.getHour() < HORAS_NORMALES[1] || fin.getHour() < HORAS_NORMALES[0]) {
+                    msg = "Trabajó en día normal con horarío nocturno, en total realizo " + tiempo + " " +
+                            "Oséa, " + horas + (horasExtra?"(son horas nocturnas extra)":"");
+                } else {
+                    msg = "";
+                }
             }
         } else {
-            msg = "Trabajó en horarío extraordinario, en total realizo " + tiempo+" " +
-                    "Oséa, "+horas;
+            msg = "Trabajó en horarío dominical, en total realizo " + tiempo + " " +
+                    "Oséa, " + horas + (horasExtra?"(son horas dominicales extra)":"");
         }
         return msg;
     }
@@ -109,7 +114,7 @@ public class Calculadora {
                 int semana_fin = darNumeroSemana(reporte.getFecha_finalizacion());
                 if (semana_inicio == semana_fin && pSemana == semana_fin) {
                     horasSemana.updateAndGet(v -> v + darTotalHorasTrabajadasPorReporte());
-                    mensajes.add(darDetallesReporte());
+                    mensajes.add(darDetallesReporte( horasSemana.get() >= 48));
                 }
             }
         });
