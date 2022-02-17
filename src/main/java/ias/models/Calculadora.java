@@ -30,7 +30,7 @@ public class Calculadora {
     //-------------------------------- CÁLCULOS ---------------------------------
     //---------------------------------------------------------------------------
 
-    public int darNumeroSemana(final Date pFecha) {
+    private int darNumeroSemana(final Date pFecha) {
         final Calendar calendar = new GregorianCalendar();
         calendar.setFirstDayOfWeek(Calendar.MONDAY);
         calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
@@ -39,13 +39,13 @@ public class Calculadora {
         return calendar.get(Calendar.WEEK_OF_YEAR);
     }
 
-    public boolean esDelMismoAño(final int pFecha) {
+    private boolean esDelMismoAño(final int pFecha) {
         final int fecha_inicio = reporte.darAnioFecha(reporte.getFecha_inicio());
         final int fecha_fin = reporte.darAnioFecha(reporte.getFecha_finalizacion());
         return pFecha == fecha_fin && pFecha == fecha_inicio;
     }
 
-    public double darTotalHorasTrabajadas() {
+    private double darTotalHorasTrabajadas() {
         double diferencia = reporte.getFecha_finalizacion().getTime() - reporte.getFecha_inicio().getTime();
         double dias = diferencia / (24 * 60 * 60 * 1000);
         double horas = (diferencia / (60 * 60 * 1000) - dias * 24);
@@ -54,7 +54,7 @@ public class Calculadora {
         return ((dias * 24 + horas) + (minutos / 60));
     }
 
-    public double darTotalHorasTrabajadasPorReporte() {
+    private double darTotalHorasTrabajadasPorReporte() {
         double diferencia = reporte.getFecha_finalizacion().getTime() - reporte.getFecha_inicio().getTime();
         double dias = diferencia / (24 * 60 * 60 * 1000);
         double horas = (diferencia / (60 * 60 * 1000) - dias * 24);
@@ -68,7 +68,7 @@ public class Calculadora {
                 pFecha.getDayOfWeek() == DayOfWeek.FRIDAY || pFecha.getDayOfWeek() == DayOfWeek.SATURDAY;
     }
 
-    public String darDetallesReporte(final boolean horasExtra) {
+    private String darDetallesReporte(final boolean horasExtra) {
         final String msg;
         final LocalDateTime inicio = Instant.ofEpochMilli(reporte.getFecha_inicio().getTime())
                 .atZone(ZoneId.systemDefault())
