@@ -39,7 +39,7 @@ public class CalculadoraRest {
                 RESPONSE.put("mensaje", "Sin datos");
                 return new ResponseEntity(RESPONSE, HttpStatus.OK);
             }
-            RESPONSE.put("informe", CALCULADORA.darInformes(anio, semana, listado));
+            RESPONSE.put("mensaje", CALCULADORA.darInformes(anio, semana, listado));
             return new ResponseEntity(RESPONSE, HttpStatus.OK);
         } catch (DataAccessException e) {
             RESPONSE.put("mensaje", "No se ha logrado realizar la consulta en la base de datos");
