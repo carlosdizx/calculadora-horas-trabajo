@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 
-@CrossOrigin(origins = {"http://localhost:4200"})
+@CrossOrigin(origins = {"http://localhost:4200","https://calculadora-nomina-ias.netlify.app/","https://calculadora-nomina.netlify.app/"})
 @RestController
 @RequestMapping("/calculos/")
 public class CalculadoraRest {
