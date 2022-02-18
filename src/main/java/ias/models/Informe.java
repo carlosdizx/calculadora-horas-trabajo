@@ -1,5 +1,8 @@
 package ias.models;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -8,11 +11,14 @@ import java.util.Date;
 import static java.time.temporal.ChronoUnit.HOURS;
 import static java.time.temporal.ChronoUnit.MINUTES;
 
+
 public class Informe {
 
     private final static int HORA_MINIMA = 7;
 
     private final static int HORA_MAXIMA = 20;
+
+    private final static JSONObject OBJ = new JSONObject();
 
     private final LocalDateTime fechaI;
 
@@ -25,6 +31,7 @@ public class Informe {
     private final long datosI[];
 
     private final long datosF[];
+
 
     public Informe(final Date pFechaInicio, final Date pFechaFinalizacion) {
         fechaI = Instant.ofEpochMilli(pFechaInicio.getTime())
@@ -63,35 +70,67 @@ public class Informe {
                 return 0;
             } else if (datosI[1] < HORA_MINIMA && datosF[1] > HORA_MAXIMA) {
                 return 3;
-            }
-            else if (datosI[1] < HORA_MINIMA) {
+            } else if (datosI[1] < HORA_MINIMA) {
                 return -2;
-            } else if (datosF[1] > HORA_MAXIMA){
+            } else if (datosF[1] > HORA_MAXIMA) {
                 return 2;
             }
         }
         return 1;
     }
 
-    public void asignarHoras() {
+    public JSONObject calcularHorasNormales() throws JSONException {
         final int resultado = esHorarioNormal();
+        final double result = (HOURS.between(fechaI, fechaF) + (double) MINUTES.between(fechaI, fechaF) / 60);
         if (resultado == 0) {
-            final String tiempo = HOURS.between(fechaI, fechaF) + " horas con " + MINUTES.between(fechaI, fechaF) + " minutos";
-            final String horas = (HOURS.between(fechaI, fechaF) + (double) MINUTES.between(fechaI, fechaF) / 60) + " horas";
-            System.out.println("Trabajó en día normal con horarío normal, en total realizó " + tiempo + ", " +
-                    "oséa, " + horas);
+            OBJ.put("normales", result);
+        }
+        return OBJ;
+    }
+
+    public JSONObject calcularHorasExtra() throws JSONException {
+        final int resultado = esHorarioNormal();
+        final long minima;
+        final long diferencia;
+        if (resultado == -2) {
+            minima = new Date(inicio.getYear(), inicio.getMonth(), inicio.getDate(), 7, 0).getTime();
+            diferencia = inicio.getTime() - minima;
+            //HOURS.between(minima, fechaF);------  probar esto
+            OBJ.put("nocturnas", (diferencia / (60 * 60 * 1000)));
+        } else if (resultado == 2) {
+            minima = new Date(finalizacion.getYear(), finalizacion.getMonth(), finalizacion.getDate(), 20, 0).getTime();
+            diferencia = finalizacion.getTime() - minima;
+            OBJ.put("nocturnas", (diferencia / (60 * 60 * 1000)));
+        }
+        return OBJ;
+    }
+
+    public void asignarHoras() throws JSONException {
+        final int resultado = esHorarioNormal();
+        long hNormales = 0;
+        long hNoturnas = 0;
+        long hDominiales = 0;
+        long hExtraNormales = 0;
+        long hExtraNoturnas = 0;
+        long hExtraDominiales = 0;
+        if (resultado == 0) {
+            System.out.println(calcularHorasNormales());
         } else if (resultado == 3) {
             System.out.println("Hora de inicio y de salida fallán");
         } else if (resultado == -2) {
-            System.out.println("Falla la fecha de inicio " + fechaI);
+            System.out.println(calcularHorasExtra());
         } else if (resultado == 2) {
-            System.out.println("Falla la fecha de finalizacion " + fechaF);
+            System.out.println(calcularHorasExtra());
         } else {
             System.out.println("Anormal");
         }
     }
 
     public void darDiferencia() {
-        asignarHoras();
+        try {
+            asignarHoras();
+        } catch (JSONException e) {
+            System.err.println(e);
+        }
     }
 }
