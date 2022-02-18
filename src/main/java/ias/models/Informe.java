@@ -3,44 +3,40 @@ package ias.models;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.Arrays;
 import java.util.Date;
 
-import static java.time.temporal.ChronoUnit.MINUTES;
 import static java.time.temporal.ChronoUnit.HOURS;
-import static java.time.temporal.ChronoUnit.DAYS;
-import static java.time.temporal.ChronoUnit.MONTHS;
-import static java.time.temporal.ChronoUnit.YEARS;
+import static java.time.temporal.ChronoUnit.MINUTES;
 
 public class Informe {
 
-    private final static int[] HORAS_NORMALES = new int[]{7, 20};
+    private final static int HORA_MINIMA = 7;
 
-    private final LocalDateTime fecha_inicio;
+    private final static int HORA_MAXIMA = 20;
 
-    private final LocalDateTime fecha_finalizacion;
+    private final LocalDateTime fechaI;
+
+    private final LocalDateTime fechaF;
 
     private final Date inicio;
 
     private final Date finalizacion;
 
-    private final long datos[];
+    private final long datosI[];
+
+    private final long datosF[];
 
     public Informe(final Date pFechaInicio, final Date pFechaFinalizacion) {
-        fecha_inicio = Instant.ofEpochMilli(pFechaInicio.getTime())
+        fechaI = Instant.ofEpochMilli(pFechaInicio.getTime())
                 .atZone(ZoneId.systemDefault())
                 .toLocalDateTime();
-        fecha_finalizacion = Instant.ofEpochMilli(pFechaFinalizacion.getTime())
+        fechaF = Instant.ofEpochMilli(pFechaFinalizacion.getTime())
                 .atZone(ZoneId.systemDefault())
                 .toLocalDateTime();
         inicio = pFechaInicio;
         finalizacion = pFechaFinalizacion;
-        final long minute = MINUTES.between(fecha_inicio, fecha_finalizacion);
-        final long hour = HOURS.between(fecha_inicio, fecha_finalizacion);
-        final long day = DAYS.between(fecha_inicio, fecha_finalizacion);
-        final long month = MONTHS.between(fecha_inicio, fecha_finalizacion);
-        final long year = YEARS.between(fecha_inicio, fecha_finalizacion);
-        datos = new long[]{minute, hour, day, month, year};
+        datosI = new long[]{fechaI.getMinute(), fechaI.getHour(), fechaI.getDayOfMonth(), fechaI.getMonthValue(), fechaI.getYear()};
+        datosF = new long[]{fechaF.getMinute(), fechaF.getHour(), fechaF.getDayOfMonth(), fechaF.getMonthValue(), fechaF.getYear()};
     }
 
     public double diferenciaEnHoras() {
@@ -61,13 +57,41 @@ public class Informe {
         return resultado_horasresultado_horas;
     }
 
+    public int esHorarioNormal() {
+        if (datosI[2] == datosF[2] && datosI[3] == datosF[3] && datosI[4] == datosF[4]) {
+            if (datosI[1] >= HORA_MINIMA && datosF[1] <= HORA_MAXIMA) {
+                return 0;
+            } else if (datosI[1] < HORA_MINIMA && datosF[1] > HORA_MAXIMA) {
+                return 3;
+            }
+            else if (datosI[1] < HORA_MINIMA) {
+                return -2;
+            } else if (datosF[1] > HORA_MAXIMA){
+                return 2;
+            }
+        }
+        return 1;
+    }
+
+    public void asignarHoras() {
+        final int resultado = esHorarioNormal();
+        if (resultado == 0) {
+            final String tiempo = HOURS.between(fechaI, fechaF) + " horas con " + MINUTES.between(fechaI, fechaF) + " minutos";
+            final String horas = (HOURS.between(fechaI, fechaF) + (double) MINUTES.between(fechaI, fechaF) / 60) + " horas";
+            System.out.println("Trabajó en día normal con horarío normal, en total realizó " + tiempo + ", " +
+                    "oséa, " + horas);
+        } else if (resultado == 3) {
+            System.out.println("Hora de inicio y de salida fallán");
+        } else if (resultado == -2) {
+            System.out.println("Falla la fecha de inicio " + fechaI);
+        } else if (resultado == 2) {
+            System.out.println("Falla la fecha de finalizacion " + fechaF);
+        } else {
+            System.out.println("Anormal");
+        }
+    }
 
     public void darDiferencia() {
-
-        Arrays.stream(datos).forEach((dato) -> {
-            System.out.println(dato);
-        });
-        System.out.println(diferenciaEnHoras());
-        System.out.println(diferenciaEnDias());
+        asignarHoras();
     }
 }
