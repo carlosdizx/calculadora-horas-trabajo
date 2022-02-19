@@ -56,6 +56,7 @@ public class Calculadora {
 
     private double darTotalHorasTrabajadasPorReporte() {
         double diferencia = reporte.getFecha_finalizacion().getTime() - reporte.getFecha_inicio().getTime();
+        System.out.println(diferencia);
         double dias = diferencia / (24 * 60 * 60 * 1000);
         double horas = (diferencia / (60 * 60 * 1000) - dias * 24);
         double minutos = ((diferencia / (60 * 1000)) - dias * 24 * 60 - horas * 60);
@@ -76,7 +77,7 @@ public class Calculadora {
         final LocalDateTime fin = Instant.ofEpochMilli(reporte.getFecha_finalizacion().getTime())
                 .atZone(ZoneId.systemDefault())
                 .toLocalDateTime();
-        final String tiempo = HOURS.between(inicio, fin) + " horas con " + MINUTES.between(inicio, fin) + " minutos";
+        final String tiempo = HOURS.between(inicio, fin) + " horas ";
         final String horas = (HOURS.between(inicio, fin) + (double) MINUTES.between(inicio, fin) / 60) + " horas";
         final LocalTime tiempoMin = LocalTime.of(07, 00, 00, 00);
         final LocalTime tiempoMax = LocalTime.of(20, 00, 00, 00);

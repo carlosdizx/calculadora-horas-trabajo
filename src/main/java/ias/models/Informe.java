@@ -10,6 +10,7 @@ import java.util.Date;
 
 import static java.time.temporal.ChronoUnit.HOURS;
 import static java.time.temporal.ChronoUnit.MINUTES;
+import static java.time.temporal.ChronoUnit.WEEKS;
 
 
 public class Informe {
@@ -42,8 +43,8 @@ public class Informe {
                 .toLocalDateTime();
         inicio = pFechaInicio;
         finalizacion = pFechaFinalizacion;
-        datosI = new long[]{fechaI.getMinute(), fechaI.getHour(), fechaI.getDayOfMonth(), fechaI.getMonthValue(), fechaI.getYear()};
-        datosF = new long[]{fechaF.getMinute(), fechaF.getHour(), fechaF.getDayOfMonth(), fechaF.getMonthValue(), fechaF.getYear()};
+        datosI = new long[]{fechaI.getMinute(), fechaI.getHour(), fechaI.getDayOfMonth(), fechaI.getMonthValue(), fechaI.getYear(),WEEKS.between(fechaI,fechaF)};
+        datosF = new long[]{fechaF.getMinute(), fechaF.getHour(), fechaF.getDayOfMonth(), fechaF.getMonthValue(), fechaF.getYear(),WEEKS.between(fechaI,fechaF)};
     }
 
     public double diferenciaEnHoras() {
@@ -129,6 +130,8 @@ public class Informe {
     public void darDiferencia() {
         try {
             asignarHoras();
+            System.out.println("------------------");
+            System.out.println();
         } catch (JSONException e) {
             System.err.println(e);
         }
