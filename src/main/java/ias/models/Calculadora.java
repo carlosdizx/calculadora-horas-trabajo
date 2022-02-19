@@ -56,7 +56,6 @@ public class Calculadora {
 
     private double darTotalHorasTrabajadasPorReporte() {
         double diferencia = reporte.getFecha_finalizacion().getTime() - reporte.getFecha_inicio().getTime();
-        System.out.println(diferencia);
         double dias = diferencia / (24 * 60 * 60 * 1000);
         double horas = (diferencia / (60 * 60 * 1000) - dias * 24);
         double minutos = ((diferencia / (60 * 1000)) - dias * 24 * 60 - horas * 60);
