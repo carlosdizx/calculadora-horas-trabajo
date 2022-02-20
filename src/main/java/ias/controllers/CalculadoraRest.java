@@ -36,7 +36,7 @@ public class CalculadoraRest {
         try {
             final List<Reporte> listado = service.findAllByTecnico(tecnico);
             if (listado.isEmpty()) {
-                RESPONSE.put("mensaje", "Sin datos");
+                RESPONSE.put("mensaje", listado);
                 return new ResponseEntity(RESPONSE, HttpStatus.OK);
             }
             RESPONSE.put("mensaje", CALCULADORA.darInformes(anio, semana, listado));
@@ -54,7 +54,7 @@ public class CalculadoraRest {
         try {
             final List<Reporte> listado = service.findAllByTecnico(tecnico);
             if (listado.isEmpty()) {
-                RESPONSE.put("mensaje", "Sin datos");
+                RESPONSE.put("mensaje", listado);
                 return new ResponseEntity(RESPONSE, HttpStatus.OK);
             }
             RESPONSE.put("mensaje", CALCULADORA.darInformes(anio, semana, listado));
