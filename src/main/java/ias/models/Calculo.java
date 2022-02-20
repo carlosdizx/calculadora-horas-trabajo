@@ -90,7 +90,16 @@ public class Calculo {
     private void calcularHoras() {
         while (inicio.getTime() < fin.getTime()) {
             final int tipo = darTipoJornada(inicio);
-            if (tipo == 0) {
+            if (normales + nocturnas + dominicales > 2880) {
+                if (tipo == 0) {
+                    normalesExtra += 1;
+                } else if (tipo == 1) {
+                    nocturnasExtra += 1;
+                } else if (tipo == -1) {
+                    dominicaleExtra += 1;
+                }
+            }
+            else if (tipo == 0) {
                 normales += 1;
             } else if (tipo == 1) {
                 nocturnas += 1;
@@ -116,8 +125,11 @@ public class Calculo {
         System.out.println("----------------");
 
         calculo.calcularHoras();
-        System.out.println("normales: " + calculo.normales);
-        System.out.println("nocturnas: " + calculo.nocturnas);
-        System.out.println("dominicales: " + calculo.dominicales);
+        System.out.println("normales: " + calculo.normales/60);
+        System.out.println("nocturnas: " + calculo.nocturnas/60);
+        System.out.println("dominicales: " + calculo.dominicales/60);
+        System.out.println("normales extra: " + calculo.nocturnasExtra/60);
+        System.out.println("nocturnas extra: " + calculo.nocturnasExtra/60);
+        System.out.println("dominicales extra: " + calculo.dominicaleExtra/60);
     }
 }
