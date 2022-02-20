@@ -1,11 +1,7 @@
 package ias.models;
 
-import java.time.*;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
-
-import static java.time.temporal.ChronoUnit.MINUTES;
-import static java.time.temporal.ChronoUnit.HOURS;
 
 public class Calculadora {
 
@@ -13,11 +9,6 @@ public class Calculadora {
 
     public Calculadora(Reporte reporte) {
         this.reporte = reporte;
-    }
-
-
-    public Reporte getReporte() {
-        return reporte;
     }
 
     public void setReporte(Reporte reporte) {
