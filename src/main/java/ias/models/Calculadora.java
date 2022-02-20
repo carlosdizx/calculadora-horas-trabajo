@@ -46,12 +46,6 @@ public class Calculadora {
             setReporte(rp);
             if (esDelMismoAño(pFecha)) {
                 final Calculo calculo = new Calculo(rp.getFecha_inicio(), rp.getFecha_finalizacion(), pSemana);
-                System.out.println(calculo.getNormales());
-                System.out.println(calculo.getNocturnas());
-                System.out.println(calculo.getDominicales());
-                System.out.println(calculo.getNormalesExtra());
-                System.out.println(calculo.getNocturnasExtra());
-                System.out.println(calculo.getDominicaleExtra());
                 normales.updateAndGet(v -> v + calculo.getNormales());
                 nocturnas.updateAndGet(v -> v + calculo.getNocturnas());
                 dominicales.updateAndGet(v -> v + calculo.getDominicales());
