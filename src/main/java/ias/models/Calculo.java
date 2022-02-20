@@ -70,6 +70,7 @@ public class Calculo {
     }
 
     private void calcularHoras() {
+        int contador = 0;
         while (inicio.getTime() < fin.getTime()) {
             if (darNumeroSemana(inicio) == semana) {
                 final int tipo = darTipoJornada(inicio);
@@ -82,16 +83,20 @@ public class Calculo {
                         dominicaleExtra += 1;
                     }
                 } else if (tipo == 0) {
+                    System.out.println("Hora nomral "+contador);
                     normales += 1;
                 } else if (tipo == 1) {
+                    System.out.println("Hora nocturnas "+contador);
                     nocturnas += 1;
                 } else if (tipo == -1) {
+                    System.out.println("Hora dominicales "+contador);
                     dominicales += 1;
                 }
                 inicio.setMinutes(inicio.getMinutes() + 1);
             } else {
                 return;
             }
+            contador++;
         }
     }
 
@@ -125,8 +130,8 @@ public class Calculo {
     //-----------------------------------------------------------
 
     public static void main(String[] args) {
-        final Date fechaI = new GregorianCalendar(2022, 1, 20, 7, 0).getTime();
-        final Date fechaF = new GregorianCalendar(2022, 1, 22, 2, 15).getTime();
+        final Date fechaI = new GregorianCalendar(2022, 1, 19, 19, 0).getTime();
+        final Date fechaF = new GregorianCalendar(2022, 1, 20, 8, 30).getTime();
         final Calculo calculo = new Calculo(fechaI, fechaF, 7);
 
         calculo.calcularHoras();
