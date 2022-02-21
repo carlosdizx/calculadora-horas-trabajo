@@ -88,12 +88,8 @@ public class Calculo {
                 } else if (tipo == -1) {
                     dominicales += 1;
                 }
-                inicio.setMinutes(inicio.getMinutes() + 1);
-            } else {
-                if (darNumeroSemana(fin) == semana) {
-                    inicio.setMinutes(inicio.getMinutes() + 1);
-                }
             }
+            inicio.setMinutes(inicio.getMinutes() + 1);
         }
     }
 
