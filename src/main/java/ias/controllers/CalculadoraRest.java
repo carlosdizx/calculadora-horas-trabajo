@@ -1,7 +1,7 @@
 package ias.controllers;
 
 import ias.models.Calculadora;
-import ias.models.Reporte;
+import ias.entity.Reporte;
 import ias.services.api.ReporteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicReference;
 
 @CrossOrigin(origins = {"http://localhost:4200"})
 @RestController

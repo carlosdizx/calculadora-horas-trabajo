@@ -1,7 +1,7 @@
 package ias.services.api;
 
 import ias.genericos.GenericServiceApi;
-import ias.models.Reporte;
+import ias.entity.Reporte;
 
 import java.util.List;
 

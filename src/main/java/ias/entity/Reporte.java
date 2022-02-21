@@ -1,4 +1,4 @@
-package ias.models;
+package ias.entity;
 
 import ias.enums.ListaServicios;
 

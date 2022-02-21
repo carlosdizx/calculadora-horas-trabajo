@@ -1,7 +1,8 @@
 package ias.models;
 
+import ias.entity.Reporte;
+
 import java.util.*;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class Calculadora {
 
