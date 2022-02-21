@@ -22,31 +22,31 @@ public class Calculo {
 
     private double dominicaleExtra;
 
-    final private Date inicio;
+    private Date inicio;
 
-    final private Date fin;
+    private Date fin;
 
-    private final int semana;
+    private int semana;
 
-    public Calculo(final Date pFechaI, final Date pFechaF, final int pSemana) {
+    public Calculo() {
         normales = 0;
         nocturnas = 0;
         dominicales = 0;
         normalesExtra = 0;
         nocturnasExtra = 0;
         dominicaleExtra = 0;
-        inicio = pFechaI;
-        fin = pFechaF;
-        semana = pSemana;
+    }
 
-        int contador = 0;
-        while (inicio.getTime() < fin.getTime()) {
-            inicio.setMinutes(inicio.getMinutes() + 1);
-            contador++;
-        }
-        inicio.setMinutes(inicio.getMinutes() - contador);
+    public void setInicio(final Date pFechaI) {
+        this.inicio = pFechaI;
+    }
 
-        calcularHoras();
+    public void setFin(final Date pFechaI) {
+        this.fin = pFechaI;
+    }
+
+    public void setSemana(final int pSemana) {
+        this.semana = pSemana;
     }
 
     private int darNumeroSemana(final Date pFecha) {
@@ -69,8 +69,7 @@ public class Calculo {
         }
     }
 
-    private void calcularHoras() {
-        int contador = 0;
+    public void calcularHoras() {
         while (inicio.getTime() < fin.getTime()) {
             if (darNumeroSemana(inicio) == semana) {
                 final int tipo = darTipoJornada(inicio);
@@ -83,20 +82,18 @@ public class Calculo {
                         dominicaleExtra += 1;
                     }
                 } else if (tipo == 0) {
-                    System.out.println("Hora nomral "+contador);
                     normales += 1;
                 } else if (tipo == 1) {
-                    System.out.println("Hora nocturnas "+contador);
                     nocturnas += 1;
                 } else if (tipo == -1) {
-                    System.out.println("Hora dominicales "+contador);
                     dominicales += 1;
                 }
                 inicio.setMinutes(inicio.getMinutes() + 1);
             } else {
-                return;
+                if (darNumeroSemana(fin) == semana) {
+                    inicio.setMinutes(inicio.getMinutes() + 1);
+                }
             }
-            contador++;
         }
     }
 
@@ -132,7 +129,10 @@ public class Calculo {
     public static void main(String[] args) {
         final Date fechaI = new GregorianCalendar(2022, 1, 19, 19, 0).getTime();
         final Date fechaF = new GregorianCalendar(2022, 1, 20, 8, 30).getTime();
-        final Calculo calculo = new Calculo(fechaI, fechaF, 7);
+        final Calculo calculo = new Calculo();
+        calculo.setFin(fechaF);
+        calculo.setInicio(fechaI);
+        calculo.setSemana(7);
 
         calculo.calcularHoras();
         System.out.println("normales: " + calculo.normales / 60);
