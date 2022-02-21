@@ -93,9 +93,6 @@ public class Calculo {
         }
     }
 
-    //--------------------------------------------------------------------------------
-
-
     public double getNormales() {
         return normales / 60;
     }
@@ -118,24 +115,5 @@ public class Calculo {
 
     public double getDominicaleExtra() {
         return dominicaleExtra / 60;
-    }
-
-    //-----------------------------------------------------------
-
-    public static void main(String[] args) {
-        final Date fechaI = new GregorianCalendar(2022, 1, 19, 19, 0).getTime();
-        final Date fechaF = new GregorianCalendar(2022, 1, 20, 8, 30).getTime();
-        final Calculo calculo = new Calculo();
-        calculo.setFin(fechaF);
-        calculo.setInicio(fechaI);
-        calculo.setSemana(7);
-
-        calculo.calcularHoras();
-        System.out.println("normales: " + calculo.normales / 60);
-        System.out.println("nocturnas: " + calculo.nocturnas / 60);
-        System.out.println("dominicales: " + calculo.dominicales / 60);
-        System.out.println("normales extra: " + calculo.nocturnasExtra / 60);
-        System.out.println("nocturnas extra: " + calculo.nocturnasExtra / 60);
-        System.out.println("dominicales extra: " + calculo.dominicaleExtra / 60);
     }
 }
