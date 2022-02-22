@@ -1,10 +1,12 @@
 package ias.models;
 
+import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-public class Calculo {
+public class Calculo implements Serializable {
 
     private final static int HORA_MINIMA = 7;
 
@@ -93,49 +95,28 @@ public class Calculo {
         }
     }
 
-    //--------------------------------------------------------------------------------
-
-
     public double getNormales() {
-        return normales / 60;
+        return (normales / 60);
     }
 
     public double getNocturnas() {
-        return nocturnas / 60;
+        return (nocturnas / 60);
     }
 
     public double getDominicales() {
-        return dominicales / 60;
+        return (dominicales / 60);
     }
 
     public double getNormalesExtra() {
-        return normalesExtra / 60;
+        return (normalesExtra / 60);
     }
 
     public double getNocturnasExtra() {
-        return nocturnasExtra / 60;
+        return (nocturnasExtra / 60);
     }
 
     public double getDominicaleExtra() {
-        return dominicaleExtra / 60;
+        return (dominicaleExtra / 60);
     }
 
-    //-----------------------------------------------------------
-
-    public static void main(String[] args) {
-        final Date fechaI = new GregorianCalendar(2022, 1, 19, 19, 0).getTime();
-        final Date fechaF = new GregorianCalendar(2022, 1, 20, 8, 30).getTime();
-        final Calculo calculo = new Calculo();
-        calculo.setFin(fechaF);
-        calculo.setInicio(fechaI);
-        calculo.setSemana(7);
-
-        calculo.calcularHoras();
-        System.out.println("normales: " + calculo.normales / 60);
-        System.out.println("nocturnas: " + calculo.nocturnas / 60);
-        System.out.println("dominicales: " + calculo.dominicales / 60);
-        System.out.println("normales extra: " + calculo.nocturnasExtra / 60);
-        System.out.println("nocturnas extra: " + calculo.nocturnasExtra / 60);
-        System.out.println("dominicales extra: " + calculo.dominicaleExtra / 60);
-    }
 }
