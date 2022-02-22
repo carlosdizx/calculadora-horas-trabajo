@@ -1,11 +1,12 @@
 package ias.models;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-public class Calculo {
+public class Calculo implements Serializable {
 
     private final static int HORA_MINIMA = 7;
 

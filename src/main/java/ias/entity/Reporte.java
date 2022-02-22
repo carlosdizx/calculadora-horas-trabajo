@@ -32,6 +32,17 @@ public class Reporte {
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecha_finalizacion;
 
+    public Reporte() {
+    }
+
+    public Reporte(long id, String tecnico, ListaServicios servicio, Date fecha_inicio, Date fecha_finalizacion) {
+        this.id = id;
+        this.tecnico = tecnico;
+        this.servicio = servicio;
+        this.fecha_inicio = fecha_inicio;
+        this.fecha_finalizacion = fecha_finalizacion;
+    }
+
     public long getId() {
         return id;
     }
@@ -80,6 +91,11 @@ public class Reporte {
     }
 
     public int darAnioFecha(final Date pFecha) {
-        return Integer.parseInt(pFecha.toString().split("-")[0]);
+        try {
+            return Integer.parseInt(pFecha.toString().split("-")[0]);
+        }
+        catch (Exception e){
+            return pFecha.getYear()+1900;
+        }
     }
 }
