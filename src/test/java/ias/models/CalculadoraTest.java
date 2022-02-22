@@ -5,6 +5,7 @@ import ias.enums.ListaServicios;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicReference;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -21,7 +22,28 @@ class CalculadoraTest {
         reportes.add(new Reporte(1, "1082749257", ListaServicios.A, new GregorianCalendar(2022, 1, 14, 5, 0).getTime(), new GregorianCalendar(2022, 1, 14, 13, 20).getTime()));
         reportes.add(new Reporte(2, "1082749257", ListaServicios.B, new GregorianCalendar(2022, 1, 14, 13, 40).getTime(), new GregorianCalendar(2022, 1, 14, 17, 0).getTime()));
         reportes.add(new Reporte(3, "1082749257", ListaServicios.C, new GregorianCalendar(2022, 1, 14, 19, 00).getTime(), new GregorianCalendar(2022, 1, 15, 2, 0).getTime()));
+    }
 
+    private void setupEscenarioDos() {
+        calculadora = new Calculadora();
+
+        int anio = 2022;
+        int mes = 1;
+        reportes.add(new Reporte(1, "1082749257", ListaServicios.A,
+                new GregorianCalendar(anio, mes, 15, 13, 0).getTime(),
+                new GregorianCalendar(anio, mes, 16, 1, 0).getTime()));//12 horas
+
+        reportes.add(new Reporte(2, "1082749257", ListaServicios.B,
+                new GregorianCalendar(anio, mes, 16, 2, 0).getTime(),
+                new GregorianCalendar(anio, mes, 17, 0, 0).getTime()));//22 horas
+
+        reportes.add(new Reporte(2, "1082749257", ListaServicios.C,
+                new GregorianCalendar(anio, mes, 19, 17, 0).getTime(),
+                new GregorianCalendar(anio, mes, 20, 2, 0).getTime()));//9 horas
+
+        reportes.add(new Reporte(2, "1082749257", ListaServicios.C,
+                new GregorianCalendar(anio, mes, 20, 20, 0).getTime(),
+                new GregorianCalendar(anio, mes, 21, 4, 0).getTime()));// 8 horas (-4)
     }
 
     @Test
@@ -50,5 +72,30 @@ class CalculadoraTest {
 
         assertTrue(Double.parseDouble(informes.get("normales").toString()) >= 17, "Las horas normales estan mal ");
         assertEquals(8, Double.parseDouble(informes.get("dominicales").toString()), "Las horas dominicales estan mal");
+    }
+
+    @Test
+    void testTres() {
+        setupEscenarioDos();
+        Map<String, Object> informes = calculadora.darInformes(2022, 7, reportes);
+        AtomicReference<Double> sumatoria = new AtomicReference<>((double) 0);
+        informes.forEach((key, value) -> {
+            //System.out.println(key + " -> " + value);
+            sumatoria.updateAndGet(v -> v + ((double) value));
+        });
+
+        assertEquals(47, sumatoria.get(), "La suma de horas no es la esperada");
+    }
+
+    @Test
+    void testCuatro(){
+        setupEscenarioDos();
+        Map<String, Object> informes = calculadora.darInformes(2022, 8, reportes);
+        AtomicReference<Double> sumatoria = new AtomicReference<>((double) 0);
+        informes.forEach((key, value) -> {
+            sumatoria.updateAndGet(v -> v + ((double) value));
+        });
+
+        assertEquals(4, sumatoria.get(), "La suma de horas no es la esperada");
     }
 }
