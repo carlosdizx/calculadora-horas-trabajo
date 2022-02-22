@@ -8,8 +8,8 @@ public class Calculadora {
 
     private Reporte reporte;
 
-    public Calculadora(Reporte reporte) {
-        this.reporte = reporte;
+    public Calculadora() {
+
     }
 
     public void setReporte(Reporte reporte) {

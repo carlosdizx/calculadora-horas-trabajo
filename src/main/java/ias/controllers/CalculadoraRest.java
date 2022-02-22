@@ -18,7 +18,7 @@ import java.util.Map;
 @RequestMapping("/calculos/")
 public class CalculadoraRest {
 
-    private final static Calculadora CALCULADORA = new Calculadora(null);
+    private final static Calculadora CALCULADORA = new Calculadora();
 
     private final static String NOMBRE_ENTIDAD = "calculo";
 
