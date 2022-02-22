@@ -87,8 +87,8 @@ class CalculoTest {
         calculo.calcularHoras();
         double sumatoria = calculo.getNormales() + calculo.getNocturnas() + calculo.getDominicales();
         assertTrue(sumatoria >= 48, "La suma de las horas no da 48");
-        assertTrue(calculo.getNormalesExtra() >= 52, "La suma de las horas no da 48");
-        assertTrue(calculo.getNocturnasExtra() >= 43, "La suma de las horas no da 48");
-        assertTrue(calculo.getNocturnasExtra() >= 24, "La suma de las horas no da 48");
+        assertTrue(calculo.getNormalesExtra() >= 52, "La suma de las horas debe arrojar 52");
+        assertTrue(calculo.getNocturnasExtra() >= 43, "La suma de las horas debe arrojar 43~44");
+        assertTrue(calculo.getNocturnasExtra() >= 24, "La suma de las horas debe arrojar 24");
     }
 }
