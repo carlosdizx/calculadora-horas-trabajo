@@ -1,5 +1,6 @@
 package ias.models;
 
+import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -94,26 +95,27 @@ public class Calculo {
     }
 
     public double getNormales() {
-        return normales / 60;
+        return (normales / 60);
     }
 
     public double getNocturnas() {
-        return nocturnas / 60;
+        return (nocturnas / 60);
     }
 
     public double getDominicales() {
-        return dominicales / 60;
+        return (dominicales / 60);
     }
 
     public double getNormalesExtra() {
-        return normalesExtra / 60;
+        return (normalesExtra / 60);
     }
 
     public double getNocturnasExtra() {
-        return nocturnasExtra / 60;
+        return (nocturnasExtra / 60);
     }
 
     public double getDominicaleExtra() {
-        return dominicaleExtra / 60;
+        return (dominicaleExtra / 60);
     }
+
 }
