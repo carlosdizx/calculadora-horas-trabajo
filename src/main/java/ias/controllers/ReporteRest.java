@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
-@CrossOrigin(origins = {"http://localhost:4200"})
+@CrossOrigin(origins = {"http://localhost:4200","https://calculadora-nomina.netlify.app","https://calculadora-nomina-ias.netlify.app"})
 @RestController
 @RequestMapping("/reportes/")
 public class ReporteRest {
