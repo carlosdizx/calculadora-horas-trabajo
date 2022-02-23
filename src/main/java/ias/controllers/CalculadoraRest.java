@@ -13,16 +13,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@CrossOrigin(origins = {"http://localhost:4200","https://calculadora-nomina-ias.netlify.app/","https://calculadora-nomina.netlify.app/"})
+@CrossOrigin(origins = {"http://localhost:4200","https://calculadora-nomina.netlify.app","https://calculadora-nomina-ias.netlify.app"})
 @RestController
 @RequestMapping("/calculos/")
 public class CalculadoraRest {
 
     private final static Calculadora CALCULADORA = new Calculadora();
-
-    private final static String NOMBRE_ENTIDAD = "calculo";
-
-    private final static String NOMBRE_EN_PLURAL = "calculos";
 
     private final static Map<String, Object> RESPONSE = new HashMap<>();
 
@@ -35,8 +31,8 @@ public class CalculadoraRest {
         try {
             final List<Reporte> listado = service.findAllByTecnico(tecnico);
             if (listado.isEmpty()) {
-                RESPONSE.put("mensaje", listado);
-                return new ResponseEntity(RESPONSE, HttpStatus.OK);
+                RESPONSE.put("mensaje", "Sin datos");
+                return new ResponseEntity(RESPONSE, HttpStatus.NOT_FOUND);
             }
             RESPONSE.put("mensaje", CALCULADORA.darInformes(anio, semana, listado));
             return new ResponseEntity(RESPONSE, HttpStatus.OK);
