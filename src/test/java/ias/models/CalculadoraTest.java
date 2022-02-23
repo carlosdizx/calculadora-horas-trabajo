@@ -51,36 +51,36 @@ class CalculadoraTest {
 
         int anio = 2022;
         int mes = 1;
-        reportes.add(new Reporte(1, "1082749257", ListaServicios.A,
+        reportes.add(new Reporte(1, "87570236", ListaServicios.A,
                 new GregorianCalendar(anio, mes, 21, 7, 0).getTime(),
                 new GregorianCalendar(anio, mes, 21, 10, 0).getTime()));//3 horas
 
-        reportes.add(new Reporte(2, "1082749257", ListaServicios.B,
+        reportes.add(new Reporte(2, "87570236", ListaServicios.B,
                 new GregorianCalendar(anio, mes, 21, 13, 0).getTime(),
                 new GregorianCalendar(anio, mes, 21, 17, 0).getTime()));//4 horas
 
-        reportes.add(new Reporte(2, "1082749257", ListaServicios.C,
+        reportes.add(new Reporte(3, "87570236", ListaServicios.C,
                 new GregorianCalendar(anio, mes, 21, 17, 30).getTime(),
                 new GregorianCalendar(anio, mes, 22, 0, 0).getTime()));//6.5 horas
 
-        reportes.add(new Reporte(2, "1082749257", ListaServicios.C,
+        reportes.add(new Reporte(4, "87570236", ListaServicios.C,
                 new GregorianCalendar(anio, mes, 22, 2, 0).getTime(),
                 new GregorianCalendar(anio, mes, 22, 10, 10).getTime()));//8.16 horas
 
 
-        reportes.add(new Reporte(2, "1082749257", ListaServicios.C,
+        reportes.add(new Reporte(5, "87570236", ListaServicios.C,
                 new GregorianCalendar(anio, mes, 22, 11, 0).getTime(),
                 new GregorianCalendar(anio, mes, 22, 23, 0).getTime()));//12 horas
 
-        reportes.add(new Reporte(2, "1082749257", ListaServicios.C,
+        reportes.add(new Reporte(6, "87570236", ListaServicios.C,
                 new GregorianCalendar(anio, mes, 23, 20, 0).getTime(),
                 new GregorianCalendar(anio, mes, 24, 0, 15).getTime()));//4.25 horas
 
-        reportes.add(new Reporte(2, "1082749257", ListaServicios.C,
+        reportes.add(new Reporte(7, "87570236", ListaServicios.C,
                 new GregorianCalendar(anio, mes, 25, 15, 30).getTime(),
                 new GregorianCalendar(anio, mes, 26, 20, 50).getTime()));//29.33 horas
 
-        reportes.add(new Reporte(2, "1082749257", ListaServicios.C,
+        reportes.add(new Reporte(8, "87570236", ListaServicios.C,
                 new GregorianCalendar(anio, mes, 27, 8, 0).getTime(),
                 new GregorianCalendar(anio, mes, 27, 16, 0).getTime()));//8 horas
     }
@@ -145,7 +145,6 @@ class CalculadoraTest {
         AtomicReference<Double> sumatoria = new AtomicReference<>((double) 0);
         informes.forEach((key, value) -> {
             sumatoria.updateAndGet(v -> v + ((double) value));
-            System.out.println(key+" -> "+value);
         });
 
         assertEquals(Double.parseDouble(informes.get("normales").toString()) >= 26, true, "La suma de horas normales no es la esperada");
