@@ -27,11 +27,6 @@ import javax.validation.Valid;
 @RequestMapping("/reportes/")
 public class ReporteRest {
 
-    private final static int CANTIDAD_POR_PAGINA = 5;
-
-    private final static String NOMBRE_ENTIDAD = "reporte";
-
-    private final static String NOMBRE_EN_PLURAL = "reportes";
 
     private final static Map<String, Object> RESPONSE = new HashMap<>();
 

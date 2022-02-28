@@ -26,6 +26,8 @@ public class ReporteServiceImpl extends GenericServiceImpl<Reporte, Long> implem
 
     private final static Map<String, Object> RESPONSE = new HashMap<>();
 
+    private final static String NOMBRE_EN_PLURAL = "reportes";
+
     private final static String NOMBRE_ENTIDAD = "reporte";
 
     @Autowired
@@ -44,7 +46,7 @@ public class ReporteServiceImpl extends GenericServiceImpl<Reporte, Long> implem
     public ResponseEntity<HashMap<String, Object>> findAll() {
         RESPONSE.clear();
         try {
-            RESPONSE.put("reportes", dao.findAll());
+            RESPONSE.put(NOMBRE_EN_PLURAL, dao.findAll());
             return new ResponseEntity(RESPONSE, HttpStatus.OK);
         } catch (DataAccessException e) {
             RESPONSE.put("mensaje", "No se ha logrado realizar la consulta en la base de datos");
