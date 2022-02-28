@@ -1,6 +1,6 @@
 package ias.utilities;
 
-import ias.entity.Reporte;
+import ias.models.Reporte;
 import ias.enums.ListaServicios;
 import org.junit.jupiter.api.Test;
 

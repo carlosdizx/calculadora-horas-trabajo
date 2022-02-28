@@ -1,6 +1,6 @@
 package ias.utilities;
 
-import ias.entity.Reporte;
+import ias.models.Reporte;
 
 import java.util.*;
 

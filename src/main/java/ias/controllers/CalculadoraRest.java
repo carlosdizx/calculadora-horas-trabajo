@@ -1,7 +1,7 @@
 package ias.controllers;
 
 import ias.utilities.Calculadora;
-import ias.entity.Reporte;
+import ias.models.Reporte;
 import ias.services.api.ReporteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;

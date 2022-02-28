@@ -1,7 +1,7 @@
 package ias.services.impl;
 
 import ias.genericos.GenericServiceImpl;
-import ias.entity.Reporte;
+import ias.models.Reporte;
 import ias.repositories.ReporteDAO;
 import ias.services.api.ReporteService;
 import org.springframework.beans.factory.annotation.Autowired;
