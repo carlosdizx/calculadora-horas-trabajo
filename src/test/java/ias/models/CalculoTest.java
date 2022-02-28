@@ -17,7 +17,7 @@ class CalculoTest {
     //------------------------------------------------------------------------------------------------------------------
 
     private void setupEscenarioUno(int pDia, int pInicio, int pFinal) {
-        /*
+        /**
         Fecha de inicio es del pDia de febrero del 2022, a las pInicio:00 (semana 7)
         Fecha de finalización es del pDia de febrero del 2022, a las pFinal:00 (semana 7)
          */
