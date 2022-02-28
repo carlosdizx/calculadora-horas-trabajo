@@ -54,14 +54,6 @@ public class ReporteRest {
 
     @GetMapping("servicios")
     public ResponseEntity<HashMap<String, Object>> findAllServicios() {
-        RESPONSE.clear();
-        try {
-            RESPONSE.put("servicios", ListaServicios.values());
-            return new ResponseEntity(RESPONSE, HttpStatus.OK);
-        } catch (DataAccessException e) {
-            RESPONSE.put("mensaje", "No se ha logrado realizar la consulta en la base de datos");
-            RESPONSE.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
-            return new ResponseEntity(RESPONSE, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        return service.findAllServicios();
     }
 }

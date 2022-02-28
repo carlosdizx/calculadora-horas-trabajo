@@ -15,5 +15,7 @@ public interface ReporteService extends GenericServiceApi<Reporte, Long> {
 
     ResponseEntity<HashMap<String, Object>> create(Reporte reporte,BindingResult result);
 
+    ResponseEntity<HashMap<String, Object>> findAllServicios();
+
     ResponseEntity<HashMap<String, Object>> findAllByTecnico(String tecnico, Integer anio, Integer semana);
 }

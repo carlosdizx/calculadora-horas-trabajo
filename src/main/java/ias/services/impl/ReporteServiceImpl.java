@@ -1,5 +1,6 @@
 package ias.services.impl;
 
+import ias.enums.ListaServicios;
 import ias.genericos.GenericServiceImpl;
 import ias.models.Reporte;
 import ias.repositories.ReporteDAO;
@@ -82,11 +83,20 @@ public class ReporteServiceImpl extends GenericServiceImpl<Reporte, Long> implem
         }
     }
 
+    //---------------------------------------------------------------------------
+    //---------------------------------- EXTRA ----------------------------------
+    //---------------------------------------------------------------------------
+
+    @Override
+    public ResponseEntity<HashMap<String, Object>> findAllServicios() {
+        RESPONSE.clear();
+        RESPONSE.put("servicios", ListaServicios.values());
+        return new ResponseEntity(RESPONSE, HttpStatus.OK);
+    }
 
     // -----------------------------------------------------------------------------------
     //-------------------------------------CALCULO------------------------------------------
     //-----------------------------------------------------------------------------------
-
 
     @Override
     public ResponseEntity<HashMap<String, Object>> findAllByTecnico(String tecnico, Integer anio, Integer semana) {
