@@ -2,9 +2,10 @@ package ias.services.api;
 
 import ias.genericos.GenericServiceApi;
 import ias.models.Reporte;
+import org.springframework.http.ResponseEntity;
 
-import java.util.List;
+import java.util.HashMap;
 
 public interface ReporteService extends GenericServiceApi<Reporte, Long> {
-    List<Reporte> findAllByTecnico(String tecnico);
+    ResponseEntity<HashMap<String, Object>> findAllByTecnico(String tecnico, Integer anio, Integer semana);
 }
