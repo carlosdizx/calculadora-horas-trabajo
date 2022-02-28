@@ -31,6 +31,29 @@ public class ReporteServiceImpl extends GenericServiceImpl<Reporte, Long> implem
         return dao;
     }
 
+    //-----------------------------------------------------------------------------------
+    //-------------------------------------CRUD------------------------------------------
+    //-----------------------------------------------------------------------------------
+
+    @Override
+    public ResponseEntity<HashMap<String, Object>> findAll() {
+        RESPONSE.clear();
+        try {
+            RESPONSE.put("mensaje", dao.findAll());
+            return new ResponseEntity(RESPONSE, HttpStatus.OK);
+        } catch (DataAccessException e) {
+            RESPONSE.put("mensaje", "No se ha logrado realizar la consulta en la base de datos");
+            RESPONSE.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+            return new ResponseEntity(RESPONSE, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
+    // -----------------------------------------------------------------------------------
+    //-------------------------------------CALCULO------------------------------------------
+    //-----------------------------------------------------------------------------------
+
+
     @Override
     public ResponseEntity<HashMap<String, Object>> findAllByTecnico(String tecnico, Integer anio, Integer semana) {
         RESPONSE.clear();
