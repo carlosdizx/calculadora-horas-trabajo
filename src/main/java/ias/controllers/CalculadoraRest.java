@@ -30,10 +30,6 @@ public class CalculadoraRest {
         RESPONSE.clear();
         try {
             final List<Reporte> listado = service.findAllByTecnico(tecnico);
-            if (listado.isEmpty()) {
-                RESPONSE.put("mensaje", "Sin datos");
-                return new ResponseEntity(RESPONSE, HttpStatus.NOT_FOUND);
-            }
             RESPONSE.put("mensaje", CALCULADORA.darInformes(anio, semana, listado));
             return new ResponseEntity(RESPONSE, HttpStatus.OK);
         } catch (DataAccessException e) {
