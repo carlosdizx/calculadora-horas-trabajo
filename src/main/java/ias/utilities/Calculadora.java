@@ -1,10 +1,7 @@
-package ias.models;
+package ias.utilities;
 
 import ias.entity.Reporte;
-import org.json.JSONException;
-import org.json.JSONObject;
 
-import java.io.Serializable;
 import java.util.*;
 
 public class Calculadora {

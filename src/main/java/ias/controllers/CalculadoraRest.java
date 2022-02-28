@@ -1,6 +1,6 @@
 package ias.controllers;
 
-import ias.models.Calculadora;
+import ias.utilities.Calculadora;
 import ias.entity.Reporte;
 import ias.services.api.ReporteService;
 import org.springframework.beans.factory.annotation.Autowired;
