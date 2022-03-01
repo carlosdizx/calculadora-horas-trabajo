@@ -16,4 +16,12 @@ class CuentaTest {
 
         assertEquals(esperado, cuenta.getPersona());
     }
+
+    @Test
+    void testSaldoCuenta() {
+        Cuenta cuenta = new Cuenta("Carlos", new BigDecimal("1000.12345"));
+        assertEquals(1000.12345, cuenta.getSalgo().doubleValue());
+        assertFalse(cuenta.getSalgo().compareTo(BigDecimal.ZERO) < 0);
+        assertTrue(cuenta.getSalgo().compareTo(BigDecimal.ZERO) >= 0);
+    }
 }
