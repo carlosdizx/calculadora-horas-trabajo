@@ -69,12 +69,12 @@ public class Calculo implements Serializable {
 
     private int darTipoJornada(final Date pFecha) {
         if (pFecha.getDay() == 0) {
-            return -1;
+            return TIPO_DOMINICAL;
         }
         if (pFecha.getHours() >= HORA_MINIMA && pFecha.getHours() < HORA_MAXIMA) {
-            return 0;
+            return TIPO_NORMAL;
         } else {
-            return 1;
+            return TIPO_NOCTURNO;
         }
     }
 
@@ -84,17 +84,17 @@ public class Calculo implements Serializable {
                 final int tipo = darTipoJornada(inicio);
                 if ((normales + nocturnas + dominicales) > HORAS_MAXIMAS) {
                     if (tipo == TIPO_DOMINICAL) {
-                        normalesExtra += 0.0166667;
-                    } else if (tipo == TIPO_NORMAL) {
-                        nocturnasExtra += 0.0166667;
-                    } else if (tipo == TIPO_NOCTURNO) {
                         dominicaleExtra += 0.0166667;
+                    } else if (tipo == TIPO_NORMAL) {
+                        normalesExtra += 0.0166667;
+                    } else if (tipo == TIPO_NOCTURNO) {
+                        nocturnasExtra += 0.0166667;
                     }
-                } else if (tipo == TIPO_DOMINICAL) {
-                    normales += 0.0166667;
                 } else if (tipo == TIPO_NORMAL) {
-                    nocturnas += 0.0166667;
+                    normales += 0.0166667;
                 } else if (tipo == TIPO_NOCTURNO) {
+                    nocturnas += 0.0166667;
+                } else if (tipo == TIPO_DOMINICAL) {
                     dominicales += 0.0166667;
                 }
             }
