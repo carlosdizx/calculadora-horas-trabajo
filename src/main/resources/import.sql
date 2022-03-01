@@ -1,50 +1,20 @@
-INSERT INTO public.reportes (fecha_finalizacion, fecha_inicio, servicio, tecnico) VALUES ('2022-02-14 11:30:00.000000', '2022-02-14 07:00:00.000000', 'D', '1082749257');
-INSERT INTO public.reportes (fecha_finalizacion, fecha_inicio, servicio, tecnico) VALUES ('2022-02-14 12:00:00.000000', '2022-02-14 11:30:00.000000', 'B', '1082749257');
-INSERT INTO public.reportes (fecha_finalizacion, fecha_inicio, servicio, tecnico) VALUES ('2022-02-14 12:30:00.000000', '2022-02-14 12:00:00.000000', 'A', '1082749257');
-INSERT INTO public.reportes (fecha_finalizacion, fecha_inicio, servicio, tecnico) VALUES ('2022-02-14 20:30:00.000000', '2022-02-14 13:00:00.000000', 'C', '1082749257');
-INSERT INTO public.reportes (fecha_finalizacion, fecha_inicio, servicio, tecnico) VALUES ('2022-02-14 22:00:00.000000', '2022-02-14 21:00:00.000000', 'D', '1082749257');
-INSERT INTO public.reportes (fecha_finalizacion, fecha_inicio, servicio, tecnico) VALUES ('2022-02-14 23:00:00.000000', '2022-02-14 22:00:00.000000', 'D', '1082749257');
-
-INSERT INTO public.reportes (fecha_finalizacion, fecha_inicio, servicio, tecnico) VALUES ('2022-02-20 14:30:00.000000', '2022-02-20 14:00:00.000000', 'B', '1082749257');
-INSERT INTO public.reportes (fecha_finalizacion, fecha_inicio, servicio, tecnico) VALUES ('2022-02-20 15:30:00.000000', '2022-02-20 15:00:00.000000', 'C', '1082749257');
-
-INSERT INTO public.reportes (fecha_finalizacion, fecha_inicio, servicio, tecnico) VALUES ('2022-02-15 10:00:00.000000', '2022-02-15 08:00:00.000000', 'D', '1082749257');
-INSERT INTO public.reportes (fecha_finalizacion, fecha_inicio, servicio, tecnico) VALUES ('2022-02-15 12:00:00.000000', '2022-02-15 11:30:00.000000', 'B', '1082749257');
-INSERT INTO public.reportes (fecha_finalizacion, fecha_inicio, servicio, tecnico) VALUES ('2022-02-15 12:30:00.000000', '2022-02-15 12:00:00.000000', 'A', '1082749257');
-INSERT INTO public.reportes (fecha_finalizacion, fecha_inicio, servicio, tecnico) VALUES ('2022-02-15 14:30:00.000000', '2022-02-15 13:00:00.000000', 'C', '1082749257');
-INSERT INTO public.reportes (fecha_finalizacion, fecha_inicio, servicio, tecnico) VALUES ('2022-02-15 22:00:00.000000', '2022-02-15 21:00:00.000000', 'D', '1082749257');
-
-INSERT INTO public.reportes (fecha_finalizacion, fecha_inicio, servicio, tecnico) VALUES ('2022-02-15 13:50:00.000000', '2022-02-15 08:00:00.000000', 'D', '87570236');
-INSERT INTO public.reportes (fecha_finalizacion, fecha_inicio, servicio, tecnico) VALUES ('2022-02-15 15:05:00.000000', '2022-02-15 14:00:00.000000', 'D', '87570236');
-
-INSERT INTO public.reportes (fecha_finalizacion, fecha_inicio, servicio, tecnico) VALUES ('2022-03-15 12:30:00.000000', '2022-03-15 12:00:00.000000', 'A', '1082749257');
-INSERT INTO public.reportes (fecha_finalizacion, fecha_inicio, servicio, tecnico) VALUES ('2022-03-15 13:30:00.000000', '2022-03-15 13:00:00.000000', 'A', '1082749257');
-
-INSERT INTO public.reportes (fecha_finalizacion, fecha_inicio, servicio, tecnico) VALUES ('2022-03-15 12:35:00.000000', '2022-03-15 12:00:00.000000', 'D', '87570236');
-INSERT INTO public.reportes (fecha_finalizacion, fecha_inicio, servicio, tecnico) VALUES ('2022-03-15 13:40:00.000000', '2022-03-15 13:00:00.000000', 'D', '87570236');
-
-
-INSERT INTO public.reportes (fecha_finalizacion, fecha_inicio, servicio, tecnico) VALUES ('2022-02-15 21:30:00.000000', '2022-02-15 17:45:00.000000', 'B', '1082749257');
-
-INSERT INTO public.reportes (fecha_finalizacion, fecha_inicio, servicio, tecnico) VALUES ('2022-02-16 11:30:00.000000', '2022-02-16 07:00:00.000000', 'D', '1082749257');
-INSERT INTO public.reportes (fecha_finalizacion, fecha_inicio, servicio, tecnico) VALUES ('2022-02-16 12:00:00.000000', '2022-02-16 11:30:00.000000', 'B', '1082749257');
-INSERT INTO public.reportes (fecha_finalizacion, fecha_inicio, servicio, tecnico) VALUES ('2022-02-16 12:30:00.000000', '2022-02-16 12:00:00.000000', 'A', '1082749257');
-INSERT INTO public.reportes (fecha_finalizacion, fecha_inicio, servicio, tecnico) VALUES ('2022-02-16 20:30:00.000000', '2022-02-16 13:00:00.000000', 'C', '1082749257');
-INSERT INTO public.reportes (fecha_finalizacion, fecha_inicio, servicio, tecnico) VALUES ('2022-02-16 22:00:00.000000', '2022-02-16 21:00:00.000000', 'D', '1082749257');
-INSERT INTO public.reportes (fecha_finalizacion, fecha_inicio, servicio, tecnico) VALUES ('2022-02-16 23:00:00.000000', '2022-02-16 22:00:00.000000', 'D', '1082749257');
-
-INSERT INTO public.reportes (fecha_finalizacion, fecha_inicio, servicio, tecnico) VALUES ('2022-02-17 11:30:00.000000', '2022-02-17 07:00:00.000000', 'D', '1082749257');
-INSERT INTO public.reportes (fecha_finalizacion, fecha_inicio, servicio, tecnico) VALUES ('2022-02-17 12:00:00.000000', '2022-02-17 11:30:00.000000', 'B', '1082749257');
-INSERT INTO public.reportes (fecha_finalizacion, fecha_inicio, servicio, tecnico) VALUES ('2022-02-17 12:30:00.000000', '2022-02-17 12:00:00.000000', 'A', '1082749257');
-INSERT INTO public.reportes (fecha_finalizacion, fecha_inicio, servicio, tecnico) VALUES ('2022-02-17 20:30:00.000000', '2022-02-17 13:00:00.000000', 'C', '1082749257');
-INSERT INTO public.reportes (fecha_finalizacion, fecha_inicio, servicio, tecnico) VALUES ('2022-02-17 22:00:00.000000', '2022-02-17 21:00:00.000000', 'D', '1082749257');
-
-INSERT INTO public.reportes (fecha_finalizacion, fecha_inicio, servicio, tecnico) VALUES ('2022-02-18 11:30:00.000000', '2022-02-18 07:00:00.000000', 'D', '1082749257');
-INSERT INTO public.reportes (fecha_finalizacion, fecha_inicio, servicio, tecnico) VALUES ('2022-02-18 12:00:00.000000', '2022-02-18 11:30:00.000000', 'B', '1082749257');
-INSERT INTO public.reportes (fecha_finalizacion, fecha_inicio, servicio, tecnico) VALUES ('2022-02-18 12:30:00.000000', '2022-02-18 12:00:00.000000', 'A', '1082749257');
-INSERT INTO public.reportes (fecha_finalizacion, fecha_inicio, servicio, tecnico) VALUES ('2022-02-18 20:30:00.000000', '2022-02-18 13:00:00.000000', 'C', '1082749257');
-INSERT INTO public.reportes (fecha_finalizacion, fecha_inicio, servicio, tecnico) VALUES ('2022-02-18 22:00:00.000000', '2022-02-18 21:00:00.000000', 'D', '1082749257');
-INSERT INTO public.reportes (fecha_finalizacion, fecha_inicio, servicio, tecnico) VALUES ('2022-02-18 23:00:00.000000', '2022-02-18 22:00:00.000000', 'D', '1082749257');
-
-INSERT INTO public.reportes (fecha_finalizacion, fecha_inicio, servicio, tecnico) VALUES ('2022-02-20 12:30:00.000000', '2022-02-20 12:00:00.000000', 'B', '1082749257');
-INSERT INTO public.reportes (fecha_finalizacion, fecha_inicio, servicio, tecnico) VALUES ('2022-02-20 13:30:00.000000', '2022-02-20 13:00:00.000000', 'C', '1082749257');
+INSERT INTO public.reportes (id, fecha_finalizacion, fecha_inicio, servicio, tecnico) VALUES (1, '2022-02-28 23:00:00.000000', '2022-02-28 01:00:00.000000', 'A', '1082749257');
+INSERT INTO public.reportes (id, fecha_finalizacion, fecha_inicio, servicio, tecnico) VALUES (2, '2022-03-01 23:00:00.000000', '2022-03-01 01:00:00.000000', 'A', '1082749257');
+INSERT INTO public.reportes (id, fecha_finalizacion, fecha_inicio, servicio, tecnico) VALUES (3, '2022-03-02 23:00:00.000000', '2022-03-02 01:00:00.000000', 'D', '1082749257');
+INSERT INTO public.reportes (id, fecha_finalizacion, fecha_inicio, servicio, tecnico) VALUES (4, '2022-03-06 23:00:00.000000', '2022-03-06 01:00:00.000000', 'C', '1082749257');
+INSERT INTO public.reportes (id, fecha_finalizacion, fecha_inicio, servicio, tecnico) VALUES (5, '2022-03-14 10:30:00.000000', '2022-03-14 07:00:00.000000', 'A', '1082749257');
+INSERT INTO public.reportes (id, fecha_finalizacion, fecha_inicio, servicio, tecnico) VALUES (6, '2022-03-15 06:30:00.000000', '2022-03-15 02:00:00.000000', 'C', '1082749257');
+INSERT INTO public.reportes (id, fecha_finalizacion, fecha_inicio, servicio, tecnico) VALUES (7, '2022-03-20 23:30:00.000000', '2022-03-20 00:00:00.000000', 'B', '1082749257');
+INSERT INTO public.reportes (id, fecha_finalizacion, fecha_inicio, servicio, tecnico) VALUES (8, '2022-03-21 10:00:00.000000', '2022-03-21 07:00:00.000000', 'A', '1082749257');
+INSERT INTO public.reportes (id, fecha_finalizacion, fecha_inicio, servicio, tecnico) VALUES (9, '2022-03-21 17:00:00.000000', '2022-03-21 13:00:00.000000', 'B', '1082749257');
+INSERT INTO public.reportes (id, fecha_finalizacion, fecha_inicio, servicio, tecnico) VALUES (10, '2022-03-22 00:00:00.000000', '2022-03-21 17:30:00.000000', 'C', '1082749257');
+INSERT INTO public.reportes (id, fecha_finalizacion, fecha_inicio, servicio, tecnico) VALUES (11, '2022-03-22 10:10:00.000000', '2022-03-22 02:00:00.000000', 'D', '1082749257');
+INSERT INTO public.reportes (id, fecha_finalizacion, fecha_inicio, servicio, tecnico) VALUES (12, '2022-03-22 23:00:00.000000', '2022-03-22 11:00:00.000000', 'C', '1082749257');
+INSERT INTO public.reportes (id, fecha_finalizacion, fecha_inicio, servicio, tecnico) VALUES (13, '2022-03-24 00:15:00.000000', '2022-03-23 20:00:00.000000', 'C', '1082749257');
+INSERT INTO public.reportes (id, fecha_finalizacion, fecha_inicio, servicio, tecnico) VALUES (14, '2022-03-26 20:50:00.000000', '2022-03-25 15:30:00.000000', 'B', '1082749257');
+INSERT INTO public.reportes (id, fecha_finalizacion, fecha_inicio, servicio, tecnico) VALUES (15, '2022-03-27 16:00:00.000000', '2022-03-27 08:00:00.000000', 'D', '1082749257');
+INSERT INTO public.reportes (id, fecha_finalizacion, fecha_inicio, servicio, tecnico) VALUES (16, '2022-03-16 01:00:00.000000', '2022-03-15 13:00:00.000000', 'A', '87570236');
+INSERT INTO public.reportes (id, fecha_finalizacion, fecha_inicio, servicio, tecnico) VALUES (17, '2022-03-17 00:00:00.000000', '2022-03-16 02:00:00.000000', 'B', '87570236');
+INSERT INTO public.reportes (id, fecha_finalizacion, fecha_inicio, servicio, tecnico) VALUES (18, '2022-03-20 02:00:00.000000', '2022-03-19 17:00:00.000000', 'C', '87570236');
+INSERT INTO public.reportes (id, fecha_finalizacion, fecha_inicio, servicio, tecnico) VALUES (19, '2022-03-21 04:00:00.000000', '2022-03-20 20:00:00.000000', 'D', '87570236');
+INSERT INTO public.reportes (id, fecha_finalizacion, fecha_inicio, servicio, tecnico) VALUES (20, '2022-03-20 00:00:00.000000', '2022-03-14 00:00:00.000000', 'A', '27156864');

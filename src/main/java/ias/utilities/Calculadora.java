@@ -8,8 +8,6 @@ import java.util.Map;
 
 public class Calculadora {
 
-
-
     private Reporte reporte;
 
     public Calculadora() {

@@ -16,9 +16,6 @@ import java.util.Map;
 @RequestMapping("/reportes/")
 public class ReporteRest {
 
-
-    private final static Map<String, Object> RESPONSE = new HashMap<>();
-
     @Autowired
     private ReporteService service;
 
@@ -31,10 +28,6 @@ public class ReporteRest {
     public ResponseEntity<HashMap<String, Object>> create(@Valid @RequestBody Reporte reporte, BindingResult result) {
         return service.create(reporte, result);
     }
-
-    //---------------------------------------------------------------------------
-    //---------------------------------- EXTRA ----------------------------------
-    //---------------------------------------------------------------------------
 
     @GetMapping("servicios")
     public ResponseEntity<HashMap<String, Object>> findAllServicios() {

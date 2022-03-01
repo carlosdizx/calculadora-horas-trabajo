@@ -12,7 +12,6 @@ import java.util.HashMap;
 @RequestMapping("/calculos/")
 public class CalculadoraRest {
 
-
     @Autowired
     private ReporteService service;
 
