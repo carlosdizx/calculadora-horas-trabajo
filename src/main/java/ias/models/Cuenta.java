@@ -1,5 +1,7 @@
 package ias.models;
 
+import ias.exeptions.DineroInsuficienteException;
+
 import java.math.BigDecimal;
 
 public class Cuenta {
@@ -30,7 +32,11 @@ public class Cuenta {
     }
 
     public void debito(BigDecimal monto) {
-        saldo = saldo.subtract(monto);
+        BigDecimal nuevoSaldo = saldo.subtract(monto);
+        if (nuevoSaldo.compareTo(BigDecimal.ZERO) < 0) {
+            throw new DineroInsuficienteException("Dinero insuficiente");
+        }
+        saldo = nuevoSaldo;
     }
 
     public void credito(BigDecimal monto) {
