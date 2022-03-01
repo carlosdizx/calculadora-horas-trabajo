@@ -15,9 +15,9 @@ public class Calculo implements Serializable {
 
     private final static int TIPO_NORMAL = 0;
 
-    private final static int TIPO_NOCTURNO = -1;
+    private final static int TIPO_NOCTURNO = 1;
 
-    private final static int MINUTOS_MAXIMOS = 2880;
+    private final static int HORAS_MAXIMAS = 48;
 
     private double normales;
 
@@ -82,20 +82,20 @@ public class Calculo implements Serializable {
         while (inicio.getTime() < fin.getTime()) {
             if (darNumeroSemana(inicio) == semana) {
                 final int tipo = darTipoJornada(inicio);
-                if ((normales + nocturnas + dominicales) > MINUTOS_MAXIMOS) {
+                if ((normales + nocturnas + dominicales) > HORAS_MAXIMAS) {
                     if (tipo == TIPO_DOMINICAL) {
-                        normalesExtra += 1;
+                        normalesExtra += 0.0166667;
                     } else if (tipo == TIPO_NORMAL) {
-                        nocturnasExtra += 1;
+                        nocturnasExtra += 0.0166667;
                     } else if (tipo == TIPO_NOCTURNO) {
-                        dominicaleExtra += 1;
+                        dominicaleExtra += 0.0166667;
                     }
                 } else if (tipo == TIPO_DOMINICAL) {
-                    normales += 1;
+                    normales += 0.0166667;
                 } else if (tipo == TIPO_NORMAL) {
-                    nocturnas += 1;
+                    nocturnas += 0.0166667;
                 } else if (tipo == TIPO_NOCTURNO) {
-                    dominicales += 1;
+                    dominicales += 0.0166667;
                 }
             }
             inicio.setMinutes(inicio.getMinutes() + 1);
@@ -103,27 +103,27 @@ public class Calculo implements Serializable {
     }
 
     public double getNormales() {
-        return Math.round(normales / 60 * 100.0) / 100.0;
+        return Math.round(normales * 100.0) / 100.0;
     }
 
     public double getNocturnas() {
-        return Math.round(nocturnas / 60 * 100.0) / 100.0;
+        return Math.round(nocturnas * 100.0) / 100.0;
     }
 
     public double getDominicales() {
-        return Math.round(dominicales / 60 * 100.0) / 100.0;
+        return Math.round(dominicales * 100.0) / 100.0;
     }
 
     public double getNormalesExtra() {
-        return Math.round(normalesExtra / 60 * 100.0) / 100.0;
+        return Math.round(normalesExtra * 100.0) / 100.0;
     }
 
     public double getNocturnasExtra() {
-        return Math.round(nocturnasExtra / 60 * 100.0) / 100.0;
+        return Math.round(nocturnasExtra * 100.0) / 100.0;
     }
 
     public double getDominicaleExtra() {
-        return Math.round(dominicaleExtra / 60 * 100.0) / 100.0;
+        return Math.round(dominicaleExtra * 100.0) / 100.0;
     }
 
 }
