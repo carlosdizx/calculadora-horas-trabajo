@@ -6,11 +6,11 @@ public class Cuenta {
 
     private String persona;
 
-    private BigDecimal salgo;
+    private BigDecimal saldo;
 
     public Cuenta(String persona, BigDecimal salgo) {
         this.persona = persona;
-        this.salgo = salgo;
+        this.saldo = salgo;
     }
 
     public String getPersona() {
@@ -21,12 +21,20 @@ public class Cuenta {
         this.persona = persona;
     }
 
-    public BigDecimal getSalgo() {
-        return salgo;
+    public BigDecimal getSaldo() {
+        return saldo;
     }
 
-    public void setSalgo(BigDecimal salgo) {
-        this.salgo = salgo;
+    public void setSaldo(BigDecimal saldo) {
+        this.saldo = saldo;
+    }
+
+    public void debito(BigDecimal monto) {
+        saldo = saldo.subtract(monto);
+    }
+
+    public void credito(BigDecimal monto) {
+        saldo = saldo.add(monto);
     }
 
     @Override
@@ -35,9 +43,9 @@ public class Cuenta {
             return false;
         }
         Cuenta c = (Cuenta) obj;
-        if (this.persona == null || this.salgo == null) {
+        if (this.persona == null || this.saldo == null) {
             return false;
         }
-        return this.persona.equals(c.persona) && this.salgo.equals(c.salgo);
+        return this.persona.equals(c.persona) && this.saldo.equals(c.saldo);
     }
 }
