@@ -11,6 +11,14 @@ public class Calculo implements Serializable {
 
     private final static int HORA_MAXIMA = 20;
 
+    private final static int TIPO_DOMINICAL = -1;
+
+    private final static int TIPO_NORMAL = 0;
+
+    private final static int TIPO_NOCTURNO = 1;
+
+    private final static int HORAS_MAXIMAS = 48;
+
     private double normales;
 
     private double nocturnas;
@@ -61,12 +69,12 @@ public class Calculo implements Serializable {
 
     private int darTipoJornada(final Date pFecha) {
         if (pFecha.getDay() == 0) {
-            return -1;
+            return TIPO_DOMINICAL;
         }
         if (pFecha.getHours() >= HORA_MINIMA && pFecha.getHours() < HORA_MAXIMA) {
-            return 0;
+            return TIPO_NORMAL;
         } else {
-            return 1;
+            return TIPO_NOCTURNO;
         }
     }
 
@@ -74,20 +82,20 @@ public class Calculo implements Serializable {
         while (inicio.getTime() < fin.getTime()) {
             if (darNumeroSemana(inicio) == semana) {
                 final int tipo = darTipoJornada(inicio);
-                if ((normales + nocturnas + dominicales) > 2880) {
-                    if (tipo == 0) {
-                        normalesExtra += 1;
-                    } else if (tipo == 1) {
-                        nocturnasExtra += 1;
-                    } else if (tipo == -1) {
-                        dominicaleExtra += 1;
+                if ((normales + nocturnas + dominicales) > HORAS_MAXIMAS) {
+                    if (tipo == TIPO_DOMINICAL) {
+                        dominicaleExtra += 0.0166667;
+                    } else if (tipo == TIPO_NORMAL) {
+                        normalesExtra += 0.0166667;
+                    } else if (tipo == TIPO_NOCTURNO) {
+                        nocturnasExtra += 0.0166667;
                     }
-                } else if (tipo == 0) {
-                    normales += 1;
-                } else if (tipo == 1) {
-                    nocturnas += 1;
-                } else if (tipo == -1) {
-                    dominicales += 1;
+                } else if (tipo == TIPO_NORMAL) {
+                    normales += 0.0166667;
+                } else if (tipo == TIPO_NOCTURNO) {
+                    nocturnas += 0.0166667;
+                } else if (tipo == TIPO_DOMINICAL) {
+                    dominicales += 0.0166667;
                 }
             }
             inicio.setMinutes(inicio.getMinutes() + 1);
@@ -95,27 +103,27 @@ public class Calculo implements Serializable {
     }
 
     public double getNormales() {
-        return (normales / 60);
+        return Math.round(normales * 100.0) / 100.0;
     }
 
     public double getNocturnas() {
-        return (nocturnas / 60);
+        return Math.round(nocturnas * 100.0) / 100.0;
     }
 
     public double getDominicales() {
-        return (dominicales / 60);
+        return Math.round(dominicales * 100.0) / 100.0;
     }
 
     public double getNormalesExtra() {
-        return (normalesExtra / 60);
+        return Math.round(normalesExtra * 100.0) / 100.0;
     }
 
     public double getNocturnasExtra() {
-        return (nocturnasExtra / 60);
+        return Math.round(nocturnasExtra * 100.0) / 100.0;
     }
 
     public double getDominicaleExtra() {
-        return (dominicaleExtra / 60);
+        return Math.round(dominicaleExtra * 100.0) / 100.0;
     }
 
 }
