@@ -28,4 +28,16 @@ public class Cuenta {
     public void setSalgo(BigDecimal salgo) {
         this.salgo = salgo;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Cuenta)) {
+            return false;
+        }
+        Cuenta c = (Cuenta) obj;
+        if (this.persona == null || this.salgo == null) {
+            return false;
+        }
+        return this.persona.equals(c.persona) && this.salgo.equals(c.salgo);
+    }
 }
