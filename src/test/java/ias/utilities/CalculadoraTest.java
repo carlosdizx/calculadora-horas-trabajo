@@ -1,13 +1,17 @@
 package ias.utilities;
 
-import ias.entity.Reporte;
 import ias.enums.ListaServicios;
+import ias.models.Reporte;
 import org.junit.jupiter.api.Test;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.GregorianCalendar;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class CalculadoraTest {
 
@@ -19,9 +23,15 @@ class CalculadoraTest {
     private void setupEscenarioUno() {
         calculadora = new Calculadora();
 
-        reportes.add(new Reporte(1, "1082749257", ListaServicios.A, new GregorianCalendar(2022, 1, 14, 5, 0).getTime(), new GregorianCalendar(2022, 1, 14, 13, 20).getTime()));
-        reportes.add(new Reporte(2, "1082749257", ListaServicios.B, new GregorianCalendar(2022, 1, 14, 13, 40).getTime(), new GregorianCalendar(2022, 1, 14, 17, 0).getTime()));
-        reportes.add(new Reporte(3, "1082749257", ListaServicios.C, new GregorianCalendar(2022, 1, 14, 19, 00).getTime(), new GregorianCalendar(2022, 1, 15, 2, 0).getTime()));
+        reportes.add(new Reporte(1, "1082749257", ListaServicios.A,
+                new GregorianCalendar(2022, 1, 14, 5, 0).getTime(),
+                new GregorianCalendar(2022, 1, 14, 13, 20).getTime()));
+        reportes.add(new Reporte(2, "1082749257", ListaServicios.B,
+                new GregorianCalendar(2022, 1, 14, 13, 40).getTime(),
+                new GregorianCalendar(2022, 1, 14, 17, 0).getTime()));
+        reportes.add(new Reporte(3, "1082749257", ListaServicios.C,
+                new GregorianCalendar(2022, 1, 14, 19, 00).getTime(),
+                new GregorianCalendar(2022, 1, 15, 2, 0).getTime()));
     }
 
     private void setupEscenarioDos() {
@@ -65,7 +75,7 @@ class CalculadoraTest {
 
         reportes.add(new Reporte(4, "87570236", ListaServicios.C,
                 new GregorianCalendar(anio, mes, 22, 2, 0).getTime(),
-                new GregorianCalendar(anio, mes, 22, 10, 10).getTime()));//8.16 horas
+                new GregorianCalendar(anio, mes, 22, 10, 10).getTime()));//8.17 horas
 
 
         reportes.add(new Reporte(5, "87570236", ListaServicios.C,
@@ -90,9 +100,10 @@ class CalculadoraTest {
     void testUno() {
         setupEscenarioUno();
         final Map<String, Object> informes = calculadora.darInformes(2022, 7, reportes);
-
-        assertTrue(Double.parseDouble(informes.get("normales").toString()) >= 10.6, "Las horas normales estan mal");
-        assertEquals(8, Double.parseDouble(informes.get("nocturnas").toString()), "Las horas nocturnas estan mal");
+        assertEquals(10.67, Double.parseDouble(informes.get("normales").toString()),
+                "Las horas normales estan mal");
+        assertEquals(8, Double.parseDouble(informes.get("nocturnas").toString()),
+                "Las horas nocturnas estan mal");
     }
 
     @Test
@@ -100,18 +111,28 @@ class CalculadoraTest {
         setupEscenarioUno();
         Map<String, Object> informes = calculadora.darInformes(2022, 7, reportes);
 
-        assertTrue(Double.parseDouble(informes.get("normales").toString()) >= 10.6, "Las horas normales estan mal");
-        assertEquals(8, Double.parseDouble(informes.get("nocturnas").toString()), "Las horas nocturnas estan mal");
+        assertEquals(10.67, Double.parseDouble(informes.get("normales").toString()),
+                "Las horas normales estan mal");
+        assertEquals(8, Double.parseDouble(informes.get("nocturnas").toString()),
+                "Las horas nocturnas estan mal");
 
-        reportes.add(new Reporte(1, "1082749257", ListaServicios.A, new GregorianCalendar(2022, 1, 15, 10, 50).getTime(), new GregorianCalendar(2022, 1, 15, 18, 0).getTime()));
-        reportes.add(new Reporte(2, "1082749257", ListaServicios.B, new GregorianCalendar(2022, 1, 15, 18, 0).getTime(), new GregorianCalendar(2022, 1, 14, 20, 0).getTime()));
-        reportes.add(new Reporte(3, "1082749257", ListaServicios.C, new GregorianCalendar(2022, 1, 20, 10, 00).getTime(), new GregorianCalendar(2022, 1, 20, 18, 0).getTime()));
+        reportes.add(new Reporte(1, "1082749257", ListaServicios.A,
+                new GregorianCalendar(2022, 1, 15, 10, 50).getTime(),
+                new GregorianCalendar(2022, 1, 15, 18, 0).getTime()));
+        reportes.add(new Reporte(2, "1082749257", ListaServicios.B,
+                new GregorianCalendar(2022, 1, 15, 18, 0).getTime(),
+                new GregorianCalendar(2022, 1, 14, 20, 0).getTime()));
+        reportes.add(new Reporte(3, "1082749257", ListaServicios.C,
+                new GregorianCalendar(2022, 1, 20, 10, 00).getTime(),
+                new GregorianCalendar(2022, 1, 20, 18, 0).getTime()));
 
         setupEscenarioUno();
         informes = calculadora.darInformes(2022, 7, reportes);
 
-        assertTrue(Double.parseDouble(informes.get("normales").toString()) >= 17, "Las horas normales estan mal ");
-        assertEquals(8, Double.parseDouble(informes.get("dominicales").toString()), "Las horas dominicales estan mal");
+        assertEquals(17.83, Double.parseDouble(informes.get("normales").toString()),
+                "Las horas normales estan mal ");
+        assertEquals(8, Double.parseDouble(informes.get("dominicales").toString()),
+                "Las horas dominicales estan mal");
     }
 
     @Test
@@ -122,7 +143,6 @@ class CalculadoraTest {
         informes.forEach((key, value) -> {
             sumatoria.updateAndGet(v -> v + ((double) value));
         });
-
         assertEquals(47, sumatoria.get(), "La suma de horas no es la esperada");
     }
 
@@ -134,7 +154,6 @@ class CalculadoraTest {
         informes.forEach((key, value) -> {
             sumatoria.updateAndGet(v -> v + ((double) value));
         });
-
         assertEquals(4, sumatoria.get(), "La suma de horas no es la esperada");
     }
 
@@ -146,15 +165,18 @@ class CalculadoraTest {
         informes.forEach((key, value) -> {
             sumatoria.updateAndGet(v -> v + ((double) value));
         });
-
-        assertEquals(Double.parseDouble(informes.get("normales").toString()) >= 26, true, "La suma de horas normales no es la esperada");
-        assertEquals(Double.parseDouble(informes.get("nocturnas").toString()) >= 21, true, "La suma de horas normales no es la esperada");
-        assertEquals(Double.parseDouble(informes.get("dominicales").toString()) >= 0, true, "La suma de horas normales no es la esperada");
-        assertEquals(Double.parseDouble(informes.get("normales_extra").toString()) >= 13, true, "La suma de horas normales no es la esperada");
-        assertEquals(Double.parseDouble(informes.get("nocturnas_extra").toString()) >= 6, true, "La suma de horas normales no es la esperada");
-        assertEquals(Double.parseDouble(informes.get("dominicales_extra").toString()) >= 8, true, "La suma de horas normales no es la esperada");
-
-
-        assertEquals(sumatoria.get() >= 75, true, "La suma de horas no es la esperada");
+        assertEquals(26.17, Double.parseDouble(informes.get("normales").toString()),
+                "La suma de horas normales no es la esperada");
+        assertEquals(21.83, Double.parseDouble(informes.get("nocturnas").toString()),
+                "La suma de horas normales no es la esperada");
+        assertEquals(0, Double.parseDouble(informes.get("dominicales").toString()),
+                "La suma de horas normales no es la esperada");
+        assertEquals(13, Double.parseDouble(informes.get("normales_extra").toString()),
+                "La suma de horas normales no es la esperada");
+        assertEquals(6.25, Double.parseDouble(informes.get("nocturnas_extra").toString()),
+                "La suma de horas normales no es la esperada");
+        assertEquals(8, Double.parseDouble(informes.get("dominicales_extra").toString()),
+                "La suma de horas normales no es la esperada");
+        assertEquals(75.25, sumatoria.get(), "La suma de horas no es la esperada");
     }
 }

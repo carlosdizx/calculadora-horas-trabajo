@@ -1,6 +1,6 @@
 package ias.repositories;
 
-import ias.entity.Reporte;
+import ias.models.Reporte;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
