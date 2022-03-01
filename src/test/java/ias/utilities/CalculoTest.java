@@ -1,4 +1,4 @@
-package ias.models;
+package ias.utilities;
 
 import org.junit.jupiter.api.Test;
 

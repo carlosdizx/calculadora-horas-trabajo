@@ -1,6 +1,6 @@
 package ias.controllers;
 
-import ias.models.Calculadora;
+import ias.utilities.Calculadora;
 import ias.entity.Reporte;
 import ias.services.api.ReporteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,10 +30,6 @@ public class CalculadoraRest {
         RESPONSE.clear();
         try {
             final List<Reporte> listado = service.findAllByTecnico(tecnico);
-            if (listado.isEmpty()) {
-                RESPONSE.put("mensaje", "Sin datos");
-                return new ResponseEntity(RESPONSE, HttpStatus.NOT_FOUND);
-            }
             RESPONSE.put("mensaje", CALCULADORA.darInformes(anio, semana, listado));
             return new ResponseEntity(RESPONSE, HttpStatus.OK);
         } catch (DataAccessException e) {

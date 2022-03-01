@@ -1,7 +1,6 @@
-package ias.models;
+package ias.utilities;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
