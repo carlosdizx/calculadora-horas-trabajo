@@ -5,6 +5,7 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.condition.*;
 
 import java.math.BigDecimal;
+import java.util.Properties;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -165,6 +166,44 @@ class CuentaTest {
     @Test
     @DisabledOnJre(JRE.JAVA_11)
     void NoJDK11() {
+
+    }
+
+    @Test
+    void imprimirSystemProperties() {
+        Properties properties = System.getProperties();
+        properties.forEach((k, v) -> System.out.println(k + ": " + v));
+    }
+
+
+
+    @Test
+    @EnabledIfSystemProperty(named="java.version",matches=".*11.*")
+    void testJavaVersion() {
+
+    }
+
+    @Test
+    @DisabledIfSystemProperty(named="os.arch",matches = ".*32.*")
+    void testSolo64Bits() {
+
+    }
+
+    @Test
+    @DisabledIfSystemProperty(named="os.arch",matches = ".*64.*")
+    void testNo64Bits() {
+
+    }
+
+    @Test
+    @EnabledIfSystemProperty(named = "user.name",matches = "Carlos")
+    void testUserName() {
+
+    }
+
+    @Test
+    @EnabledIfSystemProperty(named = "ENV",matches = "dev")
+    void testDev() {
 
     }
 }
