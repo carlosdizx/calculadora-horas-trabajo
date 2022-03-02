@@ -13,12 +13,23 @@ class CuentaTest {
 
     @BeforeEach
     void initMetodoCuenta() {
+        System.out.println("Inicializando el metodo!");
         cuenta = new Cuenta("Carlos", new BigDecimal("1000.12345"));
     }
 
     @AfterEach
     void tearDown() {
-        System.out.println("Finalizando la metodo!");
+        System.out.println("Finalizando el metodo!");
+    }
+
+    @BeforeAll
+    static void beforeAll() {
+        System.out.println("---------Inicializando el test---------");
+    }
+
+    @AfterAll
+    static void afterAll() {
+        System.out.println("---------Finalizando el test---------");
     }
 
     @Test
