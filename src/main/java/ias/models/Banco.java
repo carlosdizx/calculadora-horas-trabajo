@@ -1,12 +1,17 @@
 package ias.models;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Banco {
     private String banco;
 
     private List<Cuenta> cuentas;
+
+    public Banco() {
+        this.cuentas = new ArrayList<>();
+    }
 
     public String getBanco() {
         return banco;
