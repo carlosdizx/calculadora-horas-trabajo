@@ -2,6 +2,7 @@ package ias.models;
 
 import ias.exeptions.DineroInsuficienteException;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.condition.*;
 
 import java.math.BigDecimal;
 
@@ -135,5 +136,35 @@ class CuentaTest {
                                 .anyMatch(c -> c.getPersona().equals("Carlos")),
                         () -> "El banco no tiene la cuenta de la persona esperada")
         );
+    }
+
+    @Test
+    @EnabledOnOs(OS.WINDOWS)
+    void testSoloWindows() {
+
+    }
+
+    @Test
+    @EnabledOnOs({OS.LINUX, OS.MAC})
+    void testSoloLinuxMac() {
+
+    }
+
+    @Test
+    @DisabledOnOs(OS.WINDOWS)
+    void testNoWindows() {
+
+    }
+
+    @Test
+    @EnabledOnJre(JRE.JAVA_8)
+    void soloJDK8() {
+
+    }
+
+    @Test
+    @DisabledOnJre(JRE.JAVA_11)
+    void NoJDK11() {
+
     }
 }
