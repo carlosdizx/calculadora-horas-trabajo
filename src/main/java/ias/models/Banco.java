@@ -5,20 +5,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Banco {
-    private String banco;
+    private String nombre;
 
     private List<Cuenta> cuentas;
 
     public Banco() {
-        this.cuentas = new ArrayList<>();
+        cuentas = new ArrayList<>();
     }
 
-    public String getBanco() {
-        return banco;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setBanco(String banco) {
-        this.banco = banco;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public List<Cuenta> getCuentas() {
@@ -30,6 +30,7 @@ public class Banco {
     }
 
     public void addCuenta(Cuenta cuenta){
+        cuenta.setBanco(this);
         cuentas.add(cuenta);
     }
 
