@@ -9,6 +9,8 @@ import java.util.Map;
 import java.util.Properties;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
+import static org.junit.jupiter.api.Assumptions.assumingThat;
 
 class CuentaTest {
 
@@ -223,7 +225,7 @@ class CuentaTest {
     }
 
     @Test
-    @EnabledIfEnvironmentVariable(named = "NUMBER_OF_PROCESSORS",matches = "8")
+    @EnabledIfEnvironmentVariable(named = "NUMBER_OF_PROCESSORS", matches = "8")
     void testProcesadores() {
 
     }
@@ -237,6 +239,30 @@ class CuentaTest {
     @Test
     @DisabledIfEnvironmentVariable(named = "ENVIRONMENT", matches = "prod")
     void testEnvProdDisabled() {
+
+    }
+
+    @Test
+    @DisplayName("Probando el saldo de cuenta en desarrollo")
+    void testSaldoCuentaDev() {
+        boolean esDev = "dev".equals(System.getProperty("ENV"));
+        assumeTrue(esDev);
+        assertEquals(1000.12345, cuenta.getSaldo().doubleValue());
+        assertNotNull(cuenta.getSaldo());
+        assertFalse(cuenta.getSaldo().compareTo(BigDecimal.ZERO) < 0);
+        assertTrue(cuenta.getSaldo().compareTo(BigDecimal.ZERO) >= 0);
+    }
+
+    @Test
+    @DisplayName("Probando el saldo de cuenta en varias fases del proyecto")
+    void testSaldoCuentaDevProd() {
+        boolean esDev = "dev".equals(System.getProperty("ENV"));
+        assumingThat(esDev, () -> {
+            assertEquals(1000.12345, cuenta.getSaldo().doubleValue());
+            assertNotNull(cuenta.getSaldo());
+        });
+        assertFalse(cuenta.getSaldo().compareTo(BigDecimal.ZERO) < 0);
+        assertTrue(cuenta.getSaldo().compareTo(BigDecimal.ZERO) >= 0);
 
     }
 }
