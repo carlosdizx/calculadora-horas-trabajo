@@ -1,6 +1,8 @@
 package ias.models;
 
 import ias.exeptions.DineroInsuficienteException;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -10,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class CuentaTest {
 
     @Test
+    @DisplayName("Probando el nombre de la cuenta")
     void testNombreCuenta() {
         Cuenta cuenta = new Cuenta("Andres", new BigDecimal("1000.12345"));
         String esperado = "Andres";
@@ -19,6 +22,7 @@ class CuentaTest {
     }
 
     @Test
+    @DisplayName("Probando el saldo de la cuenta, valor esperado, no nulo, no negativo  y mayor a 0")
     void testSaldoCuenta() {
         Cuenta cuenta = new Cuenta("Carlos", new BigDecimal("1000.12345"));
         assertEquals(1000.12345, cuenta.getSaldo().doubleValue());
@@ -28,6 +32,7 @@ class CuentaTest {
     }
 
     @Test
+    @DisplayName("Probando la referencia de instancia para dos cuentas")
     void testReferenciaCuenta() {
         Cuenta cuenta1 = new Cuenta("Carlos", new BigDecimal("8900.9997"));
         Cuenta cuenta2 = new Cuenta("Carlos", new BigDecimal("8900.9997"));
@@ -37,6 +42,7 @@ class CuentaTest {
     }
 
     @Test
+    @DisplayName("Probando la debitación de un monto a una cuenta, no nulo, esperado en entero y en texto plano")
     void testDebitoCuenta() {
         Cuenta cuenta = new Cuenta("Carlos", new BigDecimal("1000.12345"));
         cuenta.debito(new BigDecimal(100));
@@ -46,6 +52,7 @@ class CuentaTest {
     }
 
     @Test
+    @DisplayName("Probando la acreditación de un monto a una cuenta, no nulo, esperado en entero y en texto plano")
     void testCreditoCuenta() {
         Cuenta cuenta = new Cuenta("Carlos", new BigDecimal("1000.12345"));
         cuenta.credito(new BigDecimal(100));
@@ -55,6 +62,7 @@ class CuentaTest {
     }
 
     @Test
+    @DisplayName("Probando excepción DineroInsuficienteException, falla intencionada, mensaje correcto")
     void testDineroInsuficienteException() {
         Cuenta cuenta = new Cuenta("Carlos", new BigDecimal("1000.12345"));
         Exception exception = assertThrows(DineroInsuficienteException.class, () -> {
@@ -65,6 +73,8 @@ class CuentaTest {
     }
 
     @Test
+    @DisplayName("Probando la transferencia de monto para dos cuentas, debitación y acreditación a cada cuenta el " +
+            "valor del monto")
     void testTransferirDineroCuenta() {
         Cuenta cuenta1 = new Cuenta("Carlos", new BigDecimal("2500"));
         Cuenta cuenta2 = new Cuenta("Ernesto", new BigDecimal("1500.8989"));
@@ -77,7 +87,11 @@ class CuentaTest {
     }
 
     @Test
+    @DisplayName("Probando las relaciones entre cuenta y banco, desde la perspectiva de la cuenta hacia el banco y " +
+            "del lado contrario con assertAll")
+    @Disabled
     void testRelacionBancoCuentas() {
+        fail();
         Cuenta cuenta1 = new Cuenta("Carlos", new BigDecimal("2500"));
         Cuenta cuenta2 = new Cuenta("Ernesto", new BigDecimal("1500.8989"));
         Banco banco = new Banco();
@@ -104,7 +118,7 @@ class CuentaTest {
                         .filter(c -> c.getPersona().equals("Carlos"))
                         .findFirst().isPresent(), () -> "El banco no tiene la cuenta de la persona esperada"),
                 () -> assertTrue(banco.getCuentas().stream()
-                        .anyMatch(c -> c.getPersona().equals("Carlos")),
+                                .anyMatch(c -> c.getPersona().equals("Carlos")),
                         () -> "El banco no tiene la cuenta de la persona esperada")
         );
     }
