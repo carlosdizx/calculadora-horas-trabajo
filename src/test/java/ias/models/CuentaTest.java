@@ -74,4 +74,22 @@ class CuentaTest {
         assertEquals("1000.8989",cuenta2.getSaldo().toPlainString());
         assertEquals("3000",cuenta1.getSaldo().toPlainString());
     }
+
+    @Test
+    void testRelacionBancoCuentas() {
+        Cuenta cuenta1 = new Cuenta("Carlos", new BigDecimal("2500"));
+        Cuenta cuenta2 = new Cuenta("Ernesto", new BigDecimal("1500.8989"));
+        Banco banco = new Banco();
+
+        banco.addCuenta(cuenta1);
+        banco.addCuenta(cuenta2);
+
+        banco.setBanco("Banco del estado");
+        banco.transferir(cuenta2,cuenta1,new BigDecimal("500"));
+
+        assertEquals("1000.8989",cuenta2.getSaldo().toPlainString());
+        assertEquals("3000",cuenta1.getSaldo().toPlainString());
+
+        assertEquals(2, banco.getCuentas().size());
+    }
 }
