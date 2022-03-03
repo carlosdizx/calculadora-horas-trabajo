@@ -69,15 +69,17 @@ public class ReporteServiceImpl extends GenericServiceImpl<Reporte, Long> implem
     @Override
     public ResponseEntity<HashMap<String, Object>> create(Reporte reporte, BindingResult result) {
         RESPONSE.clear();
-        if (result.hasErrors()) {
+        if (result!=null){
+            if (result.hasErrors()) {
 
-            List<String> errors = result.getFieldErrors()
-                    .stream()
-                    .map(err -> "El campo '" + err.getField() + "' " + err.getDefaultMessage())
-                    .collect(Collectors.toList());
+                List<String> errors = result.getFieldErrors()
+                        .stream()
+                        .map(err -> "El campo '" + err.getField() + "' " + err.getDefaultMessage())
+                        .collect(Collectors.toList());
 
-            RESPONSE.put("errors", errors);
-            return new ResponseEntity(RESPONSE, HttpStatus.BAD_REQUEST);
+                RESPONSE.put("errors", errors);
+                return new ResponseEntity(RESPONSE, HttpStatus.BAD_REQUEST);
+            }
         }
         if (!reporte.esRangoValido()) {
             RESPONSE.put("error", "Fechas erroneas, ingrese correctamente los valores");

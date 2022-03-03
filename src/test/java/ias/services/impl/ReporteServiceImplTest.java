@@ -6,7 +6,10 @@ import ias.repositories.ReporteDAO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 
 import java.util.Collections;
 import java.util.Date;
@@ -51,7 +54,7 @@ class ReporteServiceImplTest {
         }
 
         @Test
-        void testCreate() {
+        void testSave() {
             final Reporte reporte = new Reporte(1, "1082749257", ListaServicios.A,
                     new Date(), new Date());
             when(dao.save(REPORTE_0)).thenReturn(reporte);
@@ -95,6 +98,26 @@ class ReporteServiceImplTest {
             List<Reporte> respuesta = (List<Reporte>) (response.getBody().get("reportes"));
             assertTrue(respuesta.isEmpty());
             assertEquals(Collections.emptyList(), respuesta);
+        }
+
+        @Test
+        void testCreate() {
+            final Reporte reporte = new Reporte(1, "1082749257", ListaServicios.A,
+                    new Date(), new Date());
+            when(dao.save(REPORTE_1)).thenReturn(reporte);
+            Reporte guardado = service.save(REPORTE_1);
+
+            assertNotNull(guardado);
+            assertNotNull(reporte);
+            assertEquals(guardado, reporte);
+
+            ResponseEntity<HashMap<String, Object>> response = service.create(reporte, null);
+            assertEquals(400, response.getStatusCodeValue());
+
+
+            reporte.getFecha_finalizacion().setDate(reporte.getFecha_finalizacion().getDate() + 1);
+            response = service.create(reporte, null);
+            assertEquals(201, response.getStatusCodeValue());
         }
     }
 }
