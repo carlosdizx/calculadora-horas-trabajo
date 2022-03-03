@@ -6,8 +6,10 @@ import ias.repositories.ReporteDAO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.springframework.http.ResponseEntity;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import static ias.data.DataService.*;
@@ -30,7 +32,7 @@ class ReporteServiceImplTest {
     @Nested
     class CrudOperations {
         @Test
-        void testFindAll() {
+        void testGetAll() {
             when(dao.findAll()).thenReturn(REPORTES_1);
 
             List<Reporte> reportes = service.getAll();
@@ -58,15 +60,24 @@ class ReporteServiceImplTest {
             assertNotNull(reporte);
             assertEquals(guardado, reporte);
         }
-
-        @Test
-        void testCreateNull() {
-            when(dao.save(REPORTE_0)).thenReturn(null);
-            Reporte guardado = service.save(REPORTE_0);
-
-            assertNull(guardado);
-        }
     }
 
+    @Nested
+    class CrudResponses {
+        @Test
+        void testFindAll() {
+            when(dao.findAll()).thenReturn(REPORTES_2);
 
+            List<Reporte> reportes = service.getAll();
+            assertNotNull(reportes);
+            assertEquals(12, reportes.size());
+
+            ResponseEntity<HashMap<String, Object>> response = service.findAll();
+            assertNotNull(response);
+
+            List<Reporte> respuesta = (List<Reporte>) (response.getBody().get("reportes"));
+            assertNotNull(respuesta);
+            assertEquals(respuesta, reportes);
+        }
+    }
 }
