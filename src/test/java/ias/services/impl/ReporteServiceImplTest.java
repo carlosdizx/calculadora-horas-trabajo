@@ -7,8 +7,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static ias.data.Service.REPORTES_0;
-import static ias.data.Service.REPORTES_1;
+import static ias.data.DataService.REPORTES_0;
+import static ias.data.DataService.REPORTES_1;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -44,6 +44,5 @@ class ReporteServiceImplTest {
         List<Reporte> reportes = service.getAll();
         assertNotNull(reportes);
         assertTrue(reportes.isEmpty());
-        assertEquals(0, reportes.size());
     }
 }
