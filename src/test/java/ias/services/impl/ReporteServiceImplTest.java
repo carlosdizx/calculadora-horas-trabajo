@@ -3,6 +3,7 @@ package ias.services.impl;
 import ias.enums.ListaServicios;
 import ias.models.Reporte;
 import ias.repositories.ReporteDAO;
+import ias.utilities.Calculo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -15,6 +16,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static ias.data.DataService.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -118,6 +120,60 @@ class ReporteServiceImplTest {
             reporte.getFecha_finalizacion().setDate(reporte.getFecha_finalizacion().getDate() + 1);
             response = service.create(reporte, null);
             assertEquals(201, response.getStatusCodeValue());
+        }
+    }
+
+    @Nested
+    class CalculadoraTest {
+        @Test
+        void testFindAllByTecnico() {
+            when(dao.findAll()).thenReturn(REPORTES_2);
+
+            List<Reporte> reportes = service.getAll();
+            assertNotNull(reportes);
+            assertEquals(12, reportes.size());
+
+            List<Reporte> r1082749257 = reportes.stream()
+                    .filter(reporte -> reporte.getTecnico() == "1082749257").collect(Collectors.toList());
+            List<Reporte> r87570236 = reportes.stream()
+                    .filter(reporte -> reporte.getTecnico() == "87570236").collect(Collectors.toList());
+            List<Reporte> r27156864 = reportes.stream()
+                    .filter(reporte -> reporte.getTecnico() == "27156864").collect(Collectors.toList());
+
+            assertEquals(4, r1082749257.size());
+            assertEquals(4, r87570236.size());
+            assertEquals(4, r27156864.size());
+
+            r1082749257.stream().forEach(reporte -> {
+                Calculo calculo = new Calculo();
+                calculo.setSemana(5);
+                calculo.setInicio(reporte.getFecha_inicio());
+                calculo.setFin(reporte.getFecha_finalizacion());
+                calculo.calcularHoras();
+                assertEquals(13,calculo.getNormales());
+                assertEquals(11,calculo.getNocturnas());
+            });
+
+            r87570236.stream().forEach(reporte -> {
+                Calculo calculo = new Calculo();
+                calculo.setSemana(5);
+                calculo.setInicio(reporte.getFecha_inicio());
+                calculo.setFin(reporte.getFecha_finalizacion());
+                calculo.calcularHoras();
+                assertEquals(13,calculo.getNormales());
+                assertEquals(11,calculo.getNocturnas());
+            });
+
+            r27156864.stream().forEach(reporte -> {
+                Calculo calculo = new Calculo();
+                calculo.setSemana(5);
+                calculo.setInicio(reporte.getFecha_inicio());
+                calculo.setFin(reporte.getFecha_finalizacion());
+                calculo.calcularHoras();
+                assertEquals(13,calculo.getNormales());
+                assertEquals(11,calculo.getNocturnas());
+            });
+
         }
     }
 }
