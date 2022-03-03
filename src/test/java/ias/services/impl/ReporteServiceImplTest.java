@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.ResponseEntity;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -41,7 +42,7 @@ class ReporteServiceImplTest {
         }
 
         @Test
-        void testFindAllListaVacia() {
+        void testGetAllListaVacia() {
             when(dao.findAll()).thenReturn(REPORTES_0);
 
             List<Reporte> reportes = service.getAll();
@@ -78,6 +79,22 @@ class ReporteServiceImplTest {
             List<Reporte> respuesta = (List<Reporte>) (response.getBody().get("reportes"));
             assertNotNull(respuesta);
             assertEquals(respuesta, reportes);
+        }
+
+        @Test
+        void testFindAllListaVacia() {
+            when(dao.findAll()).thenReturn(REPORTES_0);
+
+            List<Reporte> reportes = service.getAll();
+            assertNotNull(reportes);
+            assertTrue(reportes.isEmpty());
+
+            ResponseEntity<HashMap<String, Object>> response = service.findAll();
+            assertNotNull(response);
+
+            List<Reporte> respuesta = (List<Reporte>) (response.getBody().get("reportes"));
+            assertTrue(respuesta.isEmpty());
+            assertEquals(Collections.emptyList(), respuesta);
         }
     }
 }
