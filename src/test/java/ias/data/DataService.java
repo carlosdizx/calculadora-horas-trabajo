@@ -21,4 +21,7 @@ public class DataService {
             new Reporte(7, "XXXXXXXX", ListaServicios.C, new Date(), new Date()),
             new Reporte(8, "XXXXXXXX", ListaServicios.A, new Date(), new Date())
     );
+
+    public final static Reporte REPORTE_0 =
+            new Reporte(1, "1082749257", ListaServicios.A, new Date(), new Date());
 }
