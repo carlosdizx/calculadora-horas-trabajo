@@ -58,5 +58,15 @@ class ReporteServiceImplTest {
             assertNotNull(reporte);
             assertEquals(guardado, reporte);
         }
+
+        @Test
+        void testCreateNull() {
+            when(dao.save(REPORTE_0)).thenReturn(null);
+            Reporte guardado = service.save(REPORTE_0);
+
+            assertNull(guardado);
+        }
     }
+
+
 }
