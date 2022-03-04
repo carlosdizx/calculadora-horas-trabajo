@@ -72,4 +72,10 @@ public class DataService {
         RESPONSE.put("reportes", REPORTES_2);
         return new ResponseEntity(RESPONSE, HttpStatus.OK);
     }
+
+    public final static ResponseEntity<HashMap<String, Object>> RESPONSE_SERVICIOS() {
+        final Map<String, Object> RESPONSE = new HashMap<>();
+        RESPONSE.put("reportes", ListaServicios.values());
+        return new ResponseEntity(RESPONSE, HttpStatus.OK);
+    }
 }

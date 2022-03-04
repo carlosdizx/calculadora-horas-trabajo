@@ -43,6 +43,18 @@ class ReporteRestTest {
 
         List<Reporte> reportes = (List<Reporte>) service.findAll().getBody().get("reportes");
         assertEquals(reportes, RESPONSE_REPORTES().getBody().get("reportes"));
+    }
 
+    @Test
+    void testFindAllServicios() throws Exception {
+        when(service.findAllServicios()).thenReturn(RESPONSE_SERVICIOS());
+        mockMvc.perform(get("/reportes/servicios/").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+
+        verify(service).findAllServicios();
+
+        List<ListaServicios> servicios = (List<ListaServicios>) service.findAllServicios().getBody().get("");
+        assertEquals(servicios, RESPONSE_SERVICIOS().getBody().get("servicios"));
     }
 }
