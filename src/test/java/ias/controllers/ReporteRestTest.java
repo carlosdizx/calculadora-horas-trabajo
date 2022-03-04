@@ -11,6 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import static ias.data.DataService.*;
 
@@ -39,5 +40,9 @@ class ReporteRestTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON));
 
         verify(service).findAll();
+
+        List<Reporte> reportes = (List<Reporte>) service.findAll().getBody().get("reportes");
+        assertEquals(reportes, RESPONSE_REPORTES().getBody().get("reportes"));
+
     }
 }
