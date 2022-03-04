@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.HashMap;
 import java.util.List;
 
 import static ias.data.DataService.*;
@@ -29,6 +31,9 @@ class ReporteRestTest {
 
     @MockBean
     private ReporteService service;
+
+    @MockBean
+    private CalculadoraRest rest;
 
     @Test
     void testFindAll() throws Exception {
@@ -53,7 +58,19 @@ class ReporteRestTest {
 
         verify(service).findAllServicios();
 
-        List<ListaServicios> servicios = (List<ListaServicios>) service.findAllServicios().getBody().get("");
+        List<ListaServicios> servicios = (List<ListaServicios>) service.findAllServicios().getBody().get("servicios");
         assertEquals(servicios, RESPONSE_SERVICIOS().getBody().get("servicios"));
+    }
+
+    @Test
+    void testFindAllByTecnico() throws Exception {
+        when(rest.findAllByTecnico("1082749257", 2022, 9)).thenReturn(RESPONSE_CALCULO_HORAS());
+
+        mockMvc.perform(get("/calculos/1082749257/2022/9/").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+
+        ResponseEntity<HashMap<String, Object>> response = rest.findAllByTecnico("1082749257", 2022, 9);
+        assertEquals(response.getBody().get("mensaje"), RESPONSE_CALCULO_HORAS().getBody().get("mensaje"));
     }
 }

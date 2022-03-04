@@ -83,9 +83,16 @@ public class DataService {
         return new ResponseEntity(RESPONSE, HttpStatus.OK);
     }
 
-    public final static ResponseEntity<HashMap<String, Object>> RESPONSE_CREATE_REPORTE() {
+    public final static ResponseEntity<HashMap<String, Object>> RESPONSE_CALCULO_HORAS() {
         final Map<String, Object> RESPONSE = new HashMap<>();
-        RESPONSE.put("mensaje", REPORTE_2);
-        return new ResponseEntity(RESPONSE, HttpStatus.CREATED);
+        final Map<String, Object> respuesta = new HashMap<>();
+        respuesta.put("normales", 26);
+        respuesta.put("nocturnas", 22);
+        respuesta.put("dominicales", 0);
+        respuesta.put("normales_extra", 13);
+        respuesta.put("nocturnas_extra", 5);
+        respuesta.put("dominicales_extra", 0);
+        RESPONSE.put("mensaje", respuesta);
+        return new ResponseEntity(RESPONSE, HttpStatus.OK);
     }
 }
