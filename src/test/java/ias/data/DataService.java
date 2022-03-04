@@ -13,6 +13,10 @@ public class DataService {
 
     public final static Reporte REPORTE_1 = null;
 
+    public final static Reporte REPORTE_2 =
+            new Reporte(1, "1082749257", ListaServicios.A,
+                    new Date(2022, 1, 1, 0, 0),
+                    new Date(2022, 1, 2, 0, 0));
 
     public final static List<Reporte> REPORTES_0 = Collections.emptyList();
 
@@ -77,5 +81,11 @@ public class DataService {
         final Map<String, Object> RESPONSE = new HashMap<>();
         RESPONSE.put("reportes", ListaServicios.values());
         return new ResponseEntity(RESPONSE, HttpStatus.OK);
+    }
+
+    public final static ResponseEntity<HashMap<String, Object>> RESPONSE_CREATE_REPORTE() {
+        final Map<String, Object> RESPONSE = new HashMap<>();
+        RESPONSE.put("mensaje", REPORTE_2);
+        return new ResponseEntity(RESPONSE, HttpStatus.CREATED);
     }
 }
